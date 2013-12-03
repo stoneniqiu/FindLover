@@ -1,0 +1,22 @@
+﻿@using System.Web.UI.WebControls
+@using Findlover.Models
+<style>
+     .imgdiv img{max-height: 60px;max-width: 60px;} .imgdiv a{display: inline;color: black;font-weight: bold;}
+     #linul{margin: 0;} #linul li{font-size: small;}
+</style>
+@{
+    var user = ViewBag.User as User;
+    var str = string.Format("我的Topic({0})", ViewBag.TopicCount);
+    var str1 = string.Format("喜欢({0})", ViewBag.EnjoyCount);
+    var str2 = string.Format("回应({0})", ViewBag.ReplyCount);
+  }
+
+<div>
+    <div class="imgdiv"><a href="/User/Index"><img src="@user.ImgUrl"/></a><a href="/User/Index">@user.UserName</a></div>
+    <ul id="linul">
+        <li> @Html.ActionLink("发起","CreateTopic") </li>
+        <li><a href="/Interactive/MyTopics">@str</a></li>
+        <li><a href="/Interactive/MyTopics?typeid=1">@str1</a></li>
+        <li><a href="/Interactive/MyTopics?typeid=2">@str2</a></li>
+    </ul>
+</div>

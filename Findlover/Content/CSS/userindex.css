@@ -1,0 +1,218 @@
+﻿  .infopercentleft {
+      line-height: 50px;
+      -webkit-box-shadow: 0 0 10px gray;
+      -ms-box-shadow: 0 0 10px gray;
+      box-shadow: 0 0 10px gray;text-indent: 10px;width: 35.7%;
+      -ms-border-bottom-left-radius: 5px;
+      border-bottom-left-radius: 5px;background-color: white;
+      -ms-opacity: 0.8;
+      opacity: 0.8;margin-top: 5px;
+      float: left; opacity: 1;
+  }
+
+  .infopercentright {
+      line-height: 50px;
+      -webkit-box-shadow: 0 0 10px gray;
+      -ms-box-shadow: 0 0 10px gray;
+      box-shadow: 0 0 10px gray;text-indent: 10px;width:64.3%;
+      -ms-border-bottom-right-radius: 5px;
+      border-bottom-right-radius: 5px;background-color: #fafafa;
+      margin-top: 5px;
+        float: left;
+      -ms-opacity: 1;
+      opacity: 0.8;
+      opacity: 1;
+  }
+
+  .percent{ color: red;margin-left: 15px;margin-right: 15px;}
+    .userbackground {
+        background: url(../../Content/Photos/bkg1.jpg) repeat;
+        -ms-background-size: cover;
+        background-size: cover;
+    }
+
+  .opacityset {
+      background-color: white;
+      -ms-opacity: 0.8;
+      opacity: 0.8;margin-top: 20px;
+  }
+
+  .opacityset img {
+      -ms-opacity: 1;
+      opacity: 1;background-color: white
+  }
+
+  .imgbox{ width:222px; float: left;position: relative;}
+    .imgbox img{width: 100%;height: 222px}
+    .imgbox>span {
+        position: absolute;bottom: 0;right: 0;padding: 5px;background-color: #ccc;
+        -ms-opacity: 0.7;
+        opacity: 0.7;cursor: pointer
+    }
+
+  .imgbox>span:hover{background-color: #ffb6c1}
+    .infoedit, .infowrap {
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;width: auto;float: left;font-size: small
+    }
+
+  .mytable {
+      width: 100%;
+      -moz-min-width: 500px;
+      -ms-min-width: 500px;
+      -o-min-width: 500px;
+      -webkit-min-width: 500px;
+      min-width: 500px; padding: 15px;
+  }
+
+  .mytable table td{ padding: 3px;text-align: justify;color: #999}
+     .mytable table td span{ color: black;padding-right: 110px;}
+    .infobox {
+        width: 70%;
+        -moz-min-width: 550px;
+        -ms-min-width: 550px;
+        -o-min-width: 550px;
+        -webkit-min-width: 550px;
+        min-width: 550px;height: 223px;margin-left: 15%;
+        background-color: white;margin-top: 10px;
+        -ms-border-top-right-radius: 8px;
+        border-top-right-radius: 8px;
+        -ms-opacity: 0.9;
+        opacity: 0.9;
+    }
+
+  .uname{ font-family: Microsoft JhengHei, Arial;font-size: 1.5em;font-weight: bold;text-indent: 20px; }  
+    .boderline{ border: 1px solid gray;} .hide{display: none}
+    .eidt {
+        background-color: #b0e0e6;padding: 6px 10px;width:70px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;font-size: small;margin-left: 15px;
+    }
+
+  .eidt:hover{ background-color: #e0ffff;cursor: pointer;}
+    .save {
+        background-color: #f08080;padding: 6px 10px;width:70px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;font-size: small;margin-left: 15px;text-align: center;
+    }
+
+  .save:hover{ background-color: #ffb6c1;cursor: pointer;}
+    .cancel-eidt{ color: #b0e0e6;cursor: pointer;display: inline-block}.cancel-eidt:hover{text-decoration: underline}
+    .infoedit table td{ padding: 0;padding-right: 13px;color: #999} .infoedit{ margin-left: 15px;}
+    .infoedit button{margin-left: -3px;  }
+     select,input[type='text']{ font-size: small;height: 23px;padding: 0;vertical-align: bottom;width: 180px;text-indent: 10px;color: black; }                                                                  
+    .bodybox {
+        background-color: #f0ffff;height: auto;min-height: 300px;background: -webkit-linear-gradient(top, #fff, #f0ffff);
+              padding-left: 15%;padding-right: 15%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;padding-top: 20px;
+    }
+
+  .dubai {
+      width: 100%;height: auto;line-height: 30px;background-color: white;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -ms-border-radius: 3px;
+      border-radius: 3px;padding: 20px;font-family: Microsoft JhengHei;
+      -webkit-box-shadow: 0 0 10px gray;
+      -ms-box-shadow: 0 0 10px gray;
+      box-shadow: 0 0 10px gray;color: black;
+  }
+
+  .selecttitle>span,.saytitle>span {
+      vertical-align: bottom;float: right;width: 26px;height: 26px;background-color: #b0e0e6;
+      -ms-border-radius: 13px;
+      border-radius: 13px;text-align: center;line-height: 32px;
+        margin-right: 20px;cursor: pointer;
+  }
+
+  .selecttitle>span:hover,.saytitle>span:hover{background-color: #00ced1}
+     .selecttitle>a,.saytitle>a{ font-size: small;float: right;font-weight: normal;vertical-align: bottom;display: none}
+    .saytitle{ font-size: 1.4em;}
+    .saying{ font-size: small;}
+    .comtabs {
+        padding: 20px;
+        -ms-border-radius: 3px;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 0 10px gray;
+        -ms-box-shadow: 0 0 10px gray;
+        box-shadow: 0 0 10px gray;width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;margin-top: 20px;background-color: white;
+    }
+
+  #myTab>li>a{font-size: 1.4em; cursor: pointer;font-family: Microsoft JhengHei;color: black; }
+.selecttitle {
+    font-weight: bold;font-family: Microsoft JhengHei;
+    font-size: 1.1em;clear: both;
+}
+.party {
+    min-height: 300px;background-color: white;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px gray;
+    -ms-box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 10px gray;height: auto; display: none
+}
+
+  .eidtbox,.sbox{ margin-bottom: 20px;margin-top: 10px;width: 95%}
+.eidtbox{ display: none;}
+.sbox ul,.eidtbox ul{ text-align: center;}
+.ulleft{ color: #999;text-align: right;width: 100px; display: inline-block;padding: 5px;}
+.ullefttoright {
+    color: black;text-align: left;
+    -moz-min-width: 180px;
+    -ms-min-width: 180px;
+    -o-min-width: 180px;
+    -webkit-min-width: 180px;
+    min-width: 180px;width: auto; display: inline-block; vertical-align: bottom;
+}
+
+  .longer{ width: 235px;margin-left:-120px;}
+.ulright {
+    color: black;text-align: left;
+    -moz-min-width: 180px;
+    -ms-min-width: 180px;
+    -o-min-width: 180px;
+    -webkit-min-width: 180px;
+    min-width: 180px;width: auto; display: inline-block; vertical-align: baseline;
+}
+
+  .ulright select,.ulright input{ margin: 0;vertical-align: baseline;}
+.pin{padding-left: 15%; clear: both; width: 70%; height: 55px;position: fixed;z-index: 22; }
+.sbox strong{color: #00ced1}
+/*-----内心独白----------------*/
+.say{ width: 95%;padding-right: 15px;display: none;}
+.say span{ color: #999999;margin-left: 10px;}
+.say span i{ color: black;padding: 0 5px;}
+
+/*----访问者显示私信等---------------------------*/
+    .btnholder{ display: block;margin-top: 5px;height: 25px; }
+    .like{ background-color:#ff69b4; text-align: center;margin: 10px;padding: 5px 6px;cursor: pointer }
+    .like:hover{background-color: #ffb6c1}
+    .chat{ background-color: #40e0d0;text-align: center;margin: 10px;padding: 5px 6px;cursor: pointer  }
+    .chat:hover{background-color: #afeeee}
+     .likeinfo {
+         color: #008000;position: absolute;border: 1px solid gainsboro;left: 0;top: 0;z-index: 1;padding: 5px;background-color: white;
+         -ms-opacity: 1;
+         opacity: 1;
+      display: none;
+     }
+
+  .hi{background-color:#66cdaa; text-align: center;margin: 10px;padding: 5px 6px;cursor: pointer;position: relative;}
+    .hi:hover{background-color:#afeeee;}
+    .report{ float: right;background-color:#b0c4de;color: white;padding: 2px 6px;cursor: pointer;display: none }
+    .report:hover{background-color: #cccccc;}
+     .infobox:hover .report {
+         display: inline;
+     }
+
+     #imgbox{ height: auto;min-height: 300px;}
+   #imgup{ margin-left: 10px;}

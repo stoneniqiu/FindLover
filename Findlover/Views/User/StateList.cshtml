@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Findlover.Models.State>
+<style>
+    .statebox{border-top: 1px gainsboro solid;padding: 10px 20px;height: auto;min-height: 50px;overflow: auto;}
+    .statebox .statetitle span{float: right;font-size:larger;color: gray;display: none } 
+     .statebox:hover>.statetitle span{display: inline;padding:0 4px;background-color: gainsboro;border-radius: 3px;cursor: pointer} .statetitle span:hover{color: black;}
+.statecontent img{ max-height:100px;max-width: 100px;}
+.statecontent{padding: 20px 0;}
+.statefoot .time{float: left;font-size: x-small;color: gainsboro}
+.parise{float: right;font-family: Microsoft JhengHei;max-height: 20px;cursor: pointer;color: gray;
+}
+.parise i{color: #ee82ee} .statebox:hover  .statefoot i{color: #ff00ff}
+                          
+</style>
+
+ @{
+     foreach (var state in Model)
+     {
+         <div class="statebox">
+              @if (ViewBag.IsSelf == "Self")
+              {
+                  <div class="statetitle"><span  data-stateid="@state.Id" title="删除">&times;</span></div>
+              }
+             <div class="statecontent" data-userid="@state.UserId">
+                 @Html.Raw(@state.Content)
+             </div>
+             <div class="statefoot"><span class="time"><i class="icon-time"></i>@state.ActionTime</span>
+                 <span class="parise" data-userid="@state.UserId" data-type="1" data-stateid="@state.Id" title="赞一下"><i>&hearts;</i>+<samp>@state.PraiseCount</samp></span></div>
+         </div>
+     }
+     <input type="hidden" value="@ViewBag.IsSelf" id="hidenself"/>
+ }
+<script>
+    $(function () {
+
+        //删除的处理
+        $(".statebox .statetitle span").click(function() {
+            if (confirm("删除之后不可恢复,确定删除？")) {
+                var id = $(this).attr("data-stateid");
+                var box = $(this).parent().parent();
+                $.post("/State/DeleteState", { id: id }, function() {
+                    box.fadeOut();
+                });
+            }
+        });
+
+        //赞的预处理
+        $.post("/Base/GetPraiseOrHelloList", { type: 1 }, function (data) {
+            $(".parise").each(function (n) {
+                var id = $(this).attr("data-stateid");
+                for (var i = 0; i < data.length; i++) {
+                    if (parseInt(id) == data[i]) {
+                        $(".parise i").eq(n).css("color", "#ff00ff");
+                        $(".parise ").eq(n).attr("title", "你已经赞过了");
+                    }
+                }
+            });
+        });
+        
+        //赞的处理
+        $(".parise").click(function (e) {
+            var iself = $("#hidenself").val();
+            if (iself == "Self") {
+                $(this).attr("title", "不能赞自己哦");
+                e.preventDefault();
+            } else {
+                var pars = $(this);
+                var samp = pars.find("samp");
+                var userid = $(this).attr("data-userid");
+                var stateid = $(this).attr("data-stateid");
+                var type = parseInt($(this).attr("data-type"));
+                
+                $.post("/Base/GetPersent", {}, function (data) {
+                    if (data < 0.3) {
+                        alert("你的资料完整度小于30%,暂时不能使用赞功能,请先在个人主页里完善你的资料");
+                        return;
+                    } else {
+                        
+                        $.post("/Message/MakeaParise", { "userid": userid, "stateid": stateid, statetype: type }, function (datas) {//1成功 0表示已经打过了 2表示资料不够完整。不能打招呼。
+                            alert(datas);
+                            if (datas == 1) { //说明赞成功！
+
+                                samp.slideUp(500, function () {
+                                    var count = parseInt(samp.html()) + 1;
+                                    samp.html(count);
+                                    samp.slideDown();
+                                });
+                            }
+                            pars.attr("title", "你已经赞过了");
+                            pars.find("i").css("color", "#ff00ff");
+                        });
+                    }
+                });
+            }
+        });
+
+       
+    });
+</script>

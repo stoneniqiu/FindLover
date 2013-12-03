@@ -1,0 +1,88 @@
+﻿ .userrow {
+        clear: both;
+        overflow:auto;
+        margin-bottom: 20px;
+        min-height: 170px;
+        height: auto;
+        position: relative;
+        background-color: white;
+        -ms-opacity: 1;
+        opacity: 1;
+        font-family: Microsoft JhengHei,Arial,微软雅黑;
+    }
+    .userrow:hover {
+        -webkit-box-shadow: 0 0 8px #808080;
+        -ms-box-shadow: 0 0 8px #808080;
+        box-shadow: 0 0 8px #808080
+    }
+    .rrate a{ color: black;} .rrate a:hover{text-decoration: none}
+    .leftimg {
+        width: 150px;
+        min-height: 150px;
+        height: auto;
+        float: left;
+        padding: 5px;
+        border: 1px silver solid;
+    }
+
+        .leftimg img {
+            width: 100%;
+            height: 150px;
+        }
+
+    .upline {
+        padding: 5px;
+    }
+
+    .bottomline {
+       font-size: medium
+    }
+     .bottomline>div>img{ display: inline;max-height: 50px;max-width: 50px;vertical-align: top;margin-right: 5px;cursor:pointer;
+     }
+
+    .rightbox {
+        padding: 5px 10px;
+        margin-left: 10px;
+        float: left;
+        width: 70%;
+    }
+
+    .rrate {
+        float: right;
+        cursor: pointer;
+    }
+        .rrate span {
+            color: #ff69b4;
+            font-size: 1em;
+        }
+        .rrate samp {
+            font-size: 2em;
+            color: #ff69b4;
+            font-family: Gungsuh;
+        }
+
+.rediv {
+    display: none;position: absolute;right: 0;top: 22px;z-index: 1;
+}
+.nameline .rrate a:hover>.rediv {
+    display: block;border-right: 1px gray solid;border-bottom: 1px gray solid
+}
+.rediv ul {
+    margin:0;padding: 5px;background-color: white;
+    -ms-opacity: 1;
+    opacity: 1;
+}
+
+ .rediv ul>li:hover {
+    border-bottom: 1px dotted gainsboro;cursor:default
+}
+    .infostr {
+        font-size: small;
+        color: gray;
+        padding: 10px 0;
+    }
+     .state_foot span{padding: 3px 10px;cursor: pointer;float: right;margin-top: 5px;overflow: hidden }
+     .state_foot a{color: #666;text-decoration: none;} .state_foot a:hover{color: black}
+     .hi,.chat{ border: 1px gainsboro solid;position: relative;} 
+.hi:hover,.chat:hover{ border-color: #999;}
+.nameline{position: relative;height: 22px;} 

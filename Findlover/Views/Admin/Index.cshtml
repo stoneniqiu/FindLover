@@ -1,0 +1,102 @@
+﻿@model Findlover.ViewModel.AdminViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>意中人管理平台</title>
+     <script src="../../Scripts/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="../../Scripts/jquery-1.8.3.js"></script>
+    <link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+    <link href="../../Content/CSS/adminindex.css" rel="stylesheet" />
+    <script src="../../Content/JS/Adminindex.js"></script>
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top  navbar-inverse ">
+      <div class="navbar-inner" >
+          <div style="margin-left: 15%;"> 
+          <a class="brand" href="#">意中人管理平台</a>
+              <ul class="nav">
+                  <li class="active"><a href="/Admin/Index">用户审核</a></li>
+                 <li class=""><a href="/Admin/ReportAdmin">举报管理</a></li>
+                  <li><a href="#">添加QA</a></li>
+                  <li><a href="#">情感文苑</a></li>
+                  <li><a href="#">情感诊断</a></li>
+                  <li><a href="/Admin/SysAdmin">系统管理</a></li>
+              </ul>
+              </div>
+      </div>
+</div>
+    
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="row-fluid">
+            <div class="span2">
+                <ul id="navlist" class="nav nav-list  ">
+                    <li><a href="/Admin/Index?type=0">全部 <i class="icon-chevron-right"></i></a> </li>
+                    <li><a href="/Admin/Index?type=1">仅图片<i class="icon-chevron-right"></i></a> </li>
+                    <li><a href="/Admin/Index?type=2">仅资料<i class="icon-chevron-right"></i> </a></li>
+                    <li><a href="/Admin/Index?type=3">仅男生资料<i class="icon-chevron-right"></i> </a></li>
+                    <li><a href="/Admin/Index?type=4">仅女生资料<i class="icon-chevron-right"></i> </a></li>
+                    <li><a href="/Admin/Index?type=5">仅男生头像<i class="icon-chevron-right"></i> </a></li>
+                    <li><a href="/Admin/Index?type=6">仅女生头像<i class="icon-chevron-right"></i> </a></li>
+                    <li class="divider"></li>
+                    <li><a href="/Admin/Index?type=7">已审核的资料<i class="icon-chevron-right"></i> </a></li>
+
+                    <li><a href="/User/Index">返回主页 <i class="icon-chevron-right"></i></a> </li>
+                </ul>
+         
+            </div>
+            <div class="span7">
+                @foreach (var user in Model.UncheckedUsers)
+                {
+                    <div class="row line">
+                        <div class="imgbox" data-valid="@user.IsVerifiedImg" data-check="@user.IsCheckedImg">
+                            <img alt=""  src="@user.ImgUrl"/>
+                        </div>
+                        <div class="rowdetail" data-valid="@user.IsVerified" data-check="@user.IsChecked">
+                            <ul class=" ">
+                                <li>姓   名: <span>@user.UserName</span></li>
+                                <li>性   别: <span>@user.Sex</span></li>
+                                <li>出生年月:<span>@user.BrithDate.ToShortDateString()</span></li>
+                                <li>邮   箱:<span>@user.Email</span></li>
+                            </ul>
+                            <div class="btline"   data-id="@user.UserId">
+                                <button class="btn btn-info" title="图片合格">图片<i class="icon-ok icon-white"></i></button>
+                                <button class="btn btn-warning" title="图片合格">图片<i class="icon-warning-sign icon-white"></i></button>
+                                <button class="btn btn-info"  title="资料合格">资料<i class="icon-ok icon-white"></i></button>
+                                <button class="btn btn-warning" title="资料合格">资料<i class="icon-warning-sign icon-white"></i></button>
+                                <a>重置图片审核</a>  <a>重置资料审核</a>
+                            </div> 
+                        </div>
+                        <div class="result">
+                            <div class="result_title">审核结果</div>
+                            <div class="img_result"></div>
+                            <div class="info_result"></div>
+                        </div>
+                    </div>
+                }
+                <div class="nowork">这部分目前没有任务，休息一下吧 ~ ~</div>
+            </div>
+            <div class="span3">
+                <ul class="nav nav-list">
+                    <li class="active">我的成绩单</li>
+                    <li class="divider"></li>
+                    <li> 审核头像<span id="imgcout">@ViewBag.ImgCount</span>张 </li>
+                    <li> 审核资料<span id="infocount">@ViewBag.InfoCount</span>份</li>
+                    <li><a>排名 No1</a></li>
+                </ul> 
+            </div>
+    
+        </div>
+          <div class="database">
+              <div id="indexType">@ViewData["type"]</div>
+              <div id="usercout">@Model.UncheckedUsers.Count</div>
+      </div>
+</div>
+</body>
+</html>

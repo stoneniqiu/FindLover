@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Visited";
+}
+<style>
+      .mianbox {
+     width: 62%;margin-top: 40px;overflow:visible;clear: both;
+        min-height:70px; 
+    }
+       .leftspan{width: 30%} .box{ padding-left: 15%;position: relative; }
+.leftspan span{position: absolute;top: 50px;left: 120px;font-family: 楷体;font-size:larger;}
+</style>
+ <script type="text/javascript">
+    $(function() {
+        $("#mianNav>li").eq(10).addClass("active");
+    })
+</script>
+<div class="container-fluid  background" style="margin: 0; padding: 0;min-height: 580px; margin-top: 50px;background-color: #f0f8ff">
+    <div class="box">
+        <div class="leftspan">
+            <span style="">只<br />是<br />因<br />为<br />在<br />人<br />群<br />中<br />多<br />看<br />了<br />你<br />一<br />眼</span>
+        </div>
+        <div class="">
+            <div class="mianbox" style="overflow: auto;margin-bottom: 10px;  ">
+             @Html.Action("VisitedUsers")
+            </div>
+        </div>
+    </div>
+</div>

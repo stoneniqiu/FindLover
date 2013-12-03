@@ -1,0 +1,125 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Findlover.Models
+{
+    /// <summary>
+    /// 打招呼
+    /// </summary>
+    public class Hello
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int ToUserId { get; set; }
+        /// <summary>
+        /// 打招呼的内容 送鲜花，西瓜，冰淇淋..... 
+        /// </summary>
+        [MaxLength(200)]
+        public string Content { get; set; }
+        public DateTime ActionTime { get; set; }
+    }
+<<<<<<< HEAD
+
+    /// <summary>
+    /// 赞 是对文字传情，状态的赞
+    /// </summary>
+    public class Praise
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int ToUserId { get; set; }
+        /// <summary>
+        /// 别人的状态id
+        /// </summary>
+        public int StateId { get; set; }
+        /// <summary>
+        /// 打招呼的内容 送鲜花，西瓜，冰淇淋..... 
+        /// </summary>
+        public DateTime ActionTime { get; set; }
+    }
+
+    /// <summary>
+    /// 个人状态
+    /// </summary>
+    public class State
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        /// <summary>
+        /// 状态类型 文字传情，时光隧道....
+        /// </summary>
+        [MaxLength(20)]
+        public string StateType { get; set; }
+        [MaxLength(200)]
+        public string Content { get; set; }
+        public int PraiseCount { get; set; }
+        public DateTime ActionTime { get; set; }
+    }
+
+    public enum StateType
+    {
+        Personal,//个人独白
+        Lovely,//情话
+        Remind//旧时光
+    }
+
+    /// <summary>
+    /// 相册
+    /// </summary>
+    public class Iamgbox
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        [MaxLength(20)]
+        public string BoxName { get; set; }
+        [MaxLength(100)]
+        public string ImgUrl { get; set; }
+        /// <summary>
+        /// 图片备注
+        /// </summary>
+        public string Remark { get; set; }
+
+        /// <summary>
+        /// 浏览的次数
+        /// </summary>
+        public int VisitCount { get; set; }
+
+        public int PraiseCount { get; set; }
+
+        public DateTime ActionTime { get; set; }
+    }
+
+    /// <summary>
+    /// 私信
+    /// </summary>
+    public class Message
+    {
+        public int Id { get; set; }
+        public int FromUserId { get; set; }
+        public string FromUserName { get; set; }
+        public string ImgUrl { get; set; }
+        public int ToUserId { get; set; }
+        /// <summary>
+        /// 是否已阅读 属于ToUserId
+        /// </summary>
+        public bool IsReaded { get; set; }
+
+        [MaxLength(1000)]
+        public string Content { get; set; }
+
+        public MegType MegType { get; set; }
+
+        public DateTime ActionTime { get; set; }
+    }
+
+    public enum MegType
+    {
+        Private,//私信
+        System,//系统消息
+    }
+=======
+>>>>>>> 92004d350880962e825eaffe618ba1a0bdd02d29
+}

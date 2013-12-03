@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "推荐";
+}
+<style>
+      .mianbox {
+     width: 100%;margin-top: 40px;overflow:visible;clear: both;
+        min-height:30px; 
+    }
+     .box{ padding-left: 15%;}
+     .rightspan {
+         float: left;width:22%;background-color: white;
+         -ms-opacity: 1;
+         opacity: 1;margin-top: 40px;
+     }
+
+      .mide{width: 62%;height: auto;float: left;}
+</style>
+<script type="text/javascript">
+    $(function() {
+        $("#mianNav>li").eq(1).addClass("active");
+    })
+</script>
+<div class="container-fluid  background" style="margin: 0; padding: 0; margin-top: 50px;background-color: #f0f8ff">
+    <div class="box">
+        <div class="mide">
+            <div class="mianbox">
+                  @Html.Action("RequireEdit","User")
+            </div> 
+            <div class="mianbox" style="overflow: auto;margin-bottom: 10px;">
+                @Html.Action("RecommendPage")
+            </div>
+        </div>
+        <div class="rightspan">@Html.Action("PersonalInfo","User")</div>
+    </div>
+</div>
+
+

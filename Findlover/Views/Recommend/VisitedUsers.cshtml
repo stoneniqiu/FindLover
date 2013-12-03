@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Findlover.ViewModel.VisitUser>
+<style>
+    .totoal span{color: #00bfff;font-size: 2em;font-family: 楷体}
+    .totoal{margin: 10px 0 10px 0; font-size: medium;text-indent: 10px;}
+    .hold{background-color: white;padding: 25px;margin-top: 20px;}
+    .vline{clear: both;min-height: 100px; overflow: auto;height: auto ;padding: 20px 10px; border-bottom: 1px gainsboro solid;}
+    .vline:hover{background-color: #f0ffff;}
+    .imgleft{width: 100px;height: 100px;float: left}
+    .imgleft img{width: 90px;height: 90px;}
+     .message{float: left;padding: 10px; width: 80%} .message span{color: gray}
+     .messagefoot .chat a{ color: #dcdcdc  }  .message:hover .chat a{color: #00bfff}
+    .messagefoot .chat{ float: right; cursor: pointer;}
+   
+</style>
+ <div class="hold"> 
+<div class="totoal">@Html.Raw("共有"+Model.Count()+"个<span>"+ViewBag.Sex+"</span>"+"访问了你，总访问量:"+ViewBag.VisitorCount)</div>
+
+@{
+    foreach (var visitUser in Model)
+    {
+      
+         <div class="vline">
+             <div class="imgleft">
+                <a href="/User/Index?id=@visitUser.Visitor.User.UserId"><img  src="@visitUser.Visitor.User.ImgUrl"/></a> 
+             </div>
+             <div class="message">
+                  <a href="/User/Index?id=@visitUser.Visitor.User.UserId">@visitUser.Visitor.User.UserName</a> 访问了你 @visitUser.Times 次<br/>
+                 @visitUser.Visitor.BaseInfo.Height  @visitUser.Visitor.BaseInfo.Education<br/>
+                 @Html.Raw(visitUser.Visitor.User.Age+"岁  "+visitUser.Visitor.BaseInfo.ResidenceCity)<br/>
+                   <div class="messagefoot"><span><i class="icon-time"></i>最后一次访问：@visitUser.LastVisitTime</span>
+                       <span class="chat"> <a data-name="@visitUser.Visitor.User.UserName"  data-msgType="0" data-stateType="0" data-relateId="0"  data-id="@visitUser.Visitor.User.UserId" href="#msg_box" data-toggle="modal">  发私信</a></span>
+                   </div>
+             </div>
+        </div>
+    }
+       
+}
+     </div>

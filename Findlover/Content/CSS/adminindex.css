@@ -1,0 +1,40 @@
+﻿ .imgbox{ width:150px; float: left;position: relative;}
+  .imgbox img{width: 100%;height: 150px; }
+ .imgbox>span {
+     position: absolute;bottom: 0;right: 0;padding: 5px;background-color: #ccc;
+     -ms-opacity: 0.7;
+     opacity: 0.7;cursor: pointer
+ }
+
+ .imgbox>span:hover{background-color: #ffb6c1}
+ .line{ margin-bottom: 10px;border-bottom: 1px gainsboro dotted}.line:hover {
+                                                                    -webkit-box-shadow: 0 0px 12px #cccccc;
+                                                                    -ms-box-shadow: 0px 0px 12px #cccccc;
+                                                                    box-shadow: 0px 0px 12px #cccccc;
+                                                                }
+
+ .rowdetail{ padding: 10px ; width: 50%;vertical-align: baseline;float: left;}
+  .rowdetail ul li{list-style-type: none}  .rowdetail ul { margin: 0;}
+  .boderline{ border: 1px solid gray;} .hide{display: none}
+ .result{ width: 140px;height: 120px;float: left;background-color: #fffacd;vertical-align: baseline;margin-top: 10px;display: none}
+ .result_title{ color: #999;text-align: center;padding: 5px;}
+ .rowdetail ul li{ color: gray;font-family: Arial; }
+  .rowdetail ul li span{ color: black;}
+  .img_result,.info_result{ color: #fa8072;padding: 5px;text-align: center;}
+
+ #navlist li a i{ float: right;margin-right: 20px;}
+  .btline{margin-top: 5px;display: none}
+    .btline a {
+        font-size: small;
+        padding: 3px;
+        text-decoration: none;display: none;cursor: pointer;
+  }
+    .btline a:hover{ text-decoration: underline;background-color: #fffacd;}
+    .nowork {
+        display: none;padding: 20px;text-align: center;font-family: Microsoft JhengHei;
+             color: #ffb6c1;font-size: 2em;background-color: #afeeee;
+        -ms-border-radius: 5px;
+        border-radius: 5px;margin-top: 30px;
+    }
+
+ #infocount,#imgcout{ color: #fa8072;font-family: Arial;font-size: 1em;margin: 0 8px;}

@@ -1,0 +1,110 @@
+﻿@model Findlover.Models.RegisterModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Register</title>
+</head>
+    <body>
+          <script src="../../Scripts/jquery-1.8.3.js"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+        <link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="../../Scripts/kendo/2012.2.710/kendo.all.min.js"></script>
+        <link href="../../Content/kendo/2012.2.710/kendo.default.min.css" rel="stylesheet" />
+        <link href="../../Content/kendo/2012.2.710/kendo.common.min.css" rel="stylesheet" />
+        <style>
+            fieldset{ margin: 10px auto;}
+            .box {
+                padding: 15px;margin-top: 30px;
+                -ms-border-radius: 8px;
+                -webkit-border-radius: 8px;-moz-border-radius: 8px;
+                border-radius: 8px;
+                background-color:white;
+                -ms-opacity: 0.9;
+                opacity: 0.9;
+                -webkit-box-shadow: 0 0 15px gray;
+                -ms-box-shadow: 0 0 15px gray;
+                box-shadow: 0 0 15px gray;
+            }
+
+            body {
+                background: url(../../Content/backgroundimg/b2.jpg);
+                -ms-background-size: cover;
+                background-size: cover;
+            }
+
+            .box input[type='text'], .box input[type='password']{ width: 200px;}
+       select{ width: 210px;}
+             .bodline{ border: 1px solid gray;}
+          .box span{ color: #c71585; }
+        </style>
+      
+      
+        <div class="row-fluid">
+            <div class="span4 offset4 box" >
+                  @using (Html.BeginForm()) {
+            @Html.ValidationSummary(true)
+            <div  >
+                <h4>赶紧加入，寻找你的意中人吧~</h4>
+               <div style="border-bottom: 1px solid #a9a9a9;margin-bottom: 20px;"> </div>
+          
+                    @Html.LabelFor(model => model.UserName)
+                    @Html.EditorFor(model => model.UserName)
+                    @Html.ValidationMessageFor(model => model.UserName)
+            
+    
+              
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+             
+     
+                    @Html.LabelFor(model => model.Sex)
+                    @Html.DropDownListFor(model=>model.Sex,new[]{new SelectListItem(){Text = "女生",Value = "woman"},new SelectListItem(){Text = "男生",Value = "man"}, })
+                    @Html.ValidationMessageFor(model => model.Sex)
+             
+             
+                    @Html.LabelFor(model => model.BrithDate)
+                    @Html.EditorFor(model=>model.BrithDate)
+                    @Html.ValidationMessageFor(model => model.BrithDate)
+               
+                
+                    @Html.LabelFor(model => model.Password)
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+           
+    
+               
+                    @Html.LabelFor(model => model.ConfirmPassword)
+                    @Html.EditorFor(model => model.ConfirmPassword)
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+             
+    
+                <p >
+                    <input type="submit" id="rigist" class="btn-info btn-large btn-primary" value="注册" />
+                </p>
+            </div>
+        }
+                <script>
+                    $(function() {
+                        $("#rigist").click(function() {
+                            $(this).val("正在注册...");
+                           // $(this).attr("disabled", "disabled");
+                        });
+                    });
+                </script>
+        <div>
+            @Html.ActionLink("返回登录", "Logon")
+        </div>
+            </div>
+        </div>
+      
+        
+    </body>
+</html>

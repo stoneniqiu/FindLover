@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Findlover.ViewModel.Admin>
+@{
+    ViewBag.Title = "系统管理";
+    Layout = null;
+}
+<script src="../../Scripts/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="../../Scripts/jquery-1.8.3.js"></script>
+<link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+<link href="../../Content/CSS/adminindex.css" rel="stylesheet" />
+<script src="../../Content/JS/Adminindex.js"></script>
+
+<div class="navbar navbar-inverse navbar-fixed-top  navbar-inverse ">
+    <div class="navbar-inner">
+        <div style="margin-left: 15%;">
+            <a class="brand" href="#">意中人管理平台</a>
+            <ul class="nav">
+                <li class="active"><a href="/Admin/Index">用户审核</a></li>
+                <li class=""><a href="/Admin/ReportAdmin">举报管理</a></li>
+                <li><a href="#">添加QA</a></li>
+                <li><a href="#">情感文苑</a></li>
+                <li><a href="#">情感诊断</a></li>
+                <li><a href="/Admin/SysAdmin">系统管理</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 50px;">
+    <div class="row-fluid">
+        <div class="span2">
+            <ul id="navlist" class="nav nav-list  ">
+                <li><a href="#">添加管理员<i class="icon-chevron-right"></i></a> </li>
+
+                <li class="divider"></li>
+                <li><a href="/User/Index">返回主页 <i class="icon-chevron-right"></i></a></li>
+            </ul>
+        </div>
+        <div class="span7">
+            <table id="admintable" class="table table-hover">
+                @{
+                    <tr>
+                        <td>类型</td>
+                        <td>用户名</td>
+                        <td>用户ID</td>
+                        <td>创建时间</td>
+                        <td></td>
+                    </tr>
+                    foreach (var admin in Model)
+                    {
+                        <tr>
+                            <td>@admin.Role.RoleType</td>
+                            <td>@admin.UserName</td>
+                            <td>@admin.Role.UserId</td>
+                            <td>@admin.Role.ActionTime</td>
+                            <td><a data-id="@admin.Role.UserId" data-name="@admin.UserName" data-type="@admin.Role.RoleType" href="#">删除</a></td>
+                        </tr>
+                    }
+                }
+            </table>
+            
+            <button data-toggle="modal" data-target="#myModal" class="btn btn-primary" style="float: right">添加管理员</button>
+            <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">添加管理员</h3>
+                </div>
+                <div class="modal-body">
+                     
+                    <div style="height: 200px">
+                        <input style="height: 34px;font-size: 1.2em" data-provide="typeahead" id="name" type="text" placeholder="adminName" autocomplete="off"/>
+                        <select class="dropdown"><option value="Admin">管理员</option> 
+                         <option value="Guest">嘉宾</option> 
+                         <option value="Editor">小编</option></select>
+                        <br/>
+
+                        <i>输出首字母或者单词可以自动检索现有用户的姓名</i>
+                        <div id="addmsg"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" disabled="disabled" data-dismiss="modal" aria-hidden="true">关闭</button>
+                    <button class="btn btn-primary" id="save">保存</button>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var datas = [];
+                $.post('/Admin/GetAllUserName', function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        datas[i] = data[i];
+                    }
+                });
+                //自动检索
+                $("#name").typeahead({
+                   source:datas
+                });
+               
+
+                // 删除管理员
+                $("#admintable tr a").each(function (n) {
+                    if ($(this).attr("data-type")== "SysAdmin") $(this).hide();
+                    $(this).click(function(e) {
+                        e.preventDefault();
+                        var result = confirm("确定删除管理员" + $(this).attr("data-name"));
+                       if (result) {
+                           $.post("/Admin/DeleteAdmin", { "userid": $(this).attr("data-id"), "admintype": $(this).attr("data-type")},function(data) {
+                               if(data=="ok")
+                               $("#admintable tr ").eq(n+1).hide();
+                           });
+                       }
+                    });
+                });
+
+                //添加管理员
+                $("#save").click(function() {
+                    var name = $.trim($("#name").val());
+                    var type = $(".dropdown").find("option:selected").val();
+                   
+                    if (name == "") {
+                        showmsg("不能为空", "red");
+                        return;
+                    }
+                    showmsg("正在添加...");
+                    // $("#save").disable(); 处理button 防止重复提交。
+                    $.post('/Admin/AddAdmin', { "username": name,"type":type}, function(data) {
+                        if (data == "ok") {
+                            showmsg("添加成功！", "blue");
+                            var st = setTimeout(function() {
+                                $("#myModal").modal('hide');
+                                location.reload();
+                            }, 1000);
+
+
+                        } else {
+                            showmsg(data, "red");
+                        }
+                    });
+                });
+
+                function showmsg(msg,color) {
+                    $("#addmsg").html(msg);
+                    $("#addmsg").css("color", color);
+                }
+            </script>
+        </div>
+    </div>
+</div>

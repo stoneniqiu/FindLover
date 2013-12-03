@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Topic";
+}
+<link href="../../Content/CSS/topicnav.css" rel="stylesheet" />
+@Html.Action("TopicNav")
+<div class="mianbody">
+    <div class="topleft">
+         @Html.Action("TopicList")
+    </div>
+    <div class="topright">
+        @Html.Action("InfoBlock")
+    </div>
+</div>  
+   
+   

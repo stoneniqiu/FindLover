@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Findlover.ViewModel.SimpleUser>
+<style>
+    .btnholder a{text-decoration: none;color: #666}
+   
+</style>
+<script>
+    $(function() {
+        $.post("/Base/GetLikeList", {}, function (data) {
+            $(".like").each(function() {
+                var id = $(this).attr("data-userid");
+                for (var i = 0; i < data.length; i++) {
+                    if (parseInt(id) == data[i]) {
+                    $(this).html("已喜欢").css("background-color", "white").css("color", "#00ff7f").css("border", "1px gainsboro solid");
+                    $(this).attr("title", "取消喜欢");
+                }
+                }
+            });
+        });
+    });
+</script>
+@if (!Model.Any())
+{
+    <div style="background-color: white; -ms-opacity: 1; opacity: 1;padding: 10px;"> <img src="../../Content/Photos/weiqu.jpg" /><br/>
+         还没有人，是不是要求太高了或者把谁屏蔽了。
+    </div>
+}
+@{
+     foreach (var user in Model)
+     {
+         <div class="imgbox">
+             <div class="imgwarp">
+             <a href="/User/Index?id=@user.UserId">
+                   <img src="@user.ImgUrl"/>
+             </a>
+           <br />
+             <span style="padding-left: 20px;"><a href="/User/Index?id=@user.UserId">@user.UserName </a></span><br />
+                 <span class="age">@user.Age 岁</span><span class="city">@user.City</span>
+             </div>
+             <div class="btnholder">
+                 <span class="like" data-userid="@user.UserId"><i class="icon-heart icon-white"></i>喜欢</span>
+                 <span class="chat"> <a data-name="@user.UserName" data-id="@user.UserId" data-msgType="0" data-stateType="0" data-relateId="0"   href="#msg_box" data-toggle="modal"><i class="icon-envelope icon-white"></i>私信</a></span>
+                 <span class="likeinfo"></span>
+             </div>
+         </div>
+     }
+       
+     
+  }
+    
+
+ 
+

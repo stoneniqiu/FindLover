@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Findlover.ViewModel.PariseHelloUser>
+@{
+    ViewBag.Title = "PariseHelloView";
+}
+<link href="@Url.Content("~/Content/CSS/parisehello.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(function () {
+        $("#mianNav>li").eq(10).addClass("active");
+    })
+</script>
+
+<div class="container-fluid  background" style="margin: 0; padding: 0; min-height: 580px; margin-top: 50px;height: auto; background-color: #f0f8ff">
+    <div class="box">
+        <div class="leftspan">
+            <span style="">多<br />
+                一<br />
+                点<br />
+                鼓<br />
+                励<br />
+                ，<br />
+                多<br />
+                一<br />
+                点<br />
+                勇<br />
+                气<br />
+            </span>
+        </div>
+        <div class="">
+            <div class="mianbox" style="overflow: auto; margin-bottom: 10px;">
+                <div class="hold">
+                    <div class="totoal">@Html.Raw("共收到<span>" + Model.Count() + "</span>个赞")</div>
+                    @foreach (var p in Model)
+                    {
+                        <div class="vline">
+                            <div class="imgleft">
+                                <a href="/User/Index?id=@p.UninUser.User.UserId">
+                                    <img  src="@p.UninUser.User.ImgUrl"/></a>
+                                <div>@p.UninUser.BaseInfo.ResidenceProvince @p.UninUser.BaseInfo.ResidenceCity</div>
+                            </div>
+                            <div class="message" data-userid="@p.UninUser.User.UserId">
+                                <a href="/User/Index?id=@p.UninUser.User.UserId">@p.UninUser.User.UserName</a>:@Html.Raw(p.Content)
+                                <div class="messagefoot"><span><i class="icon-time"></i>@p.Message.ActionTime</span>
+                                   <span class="chat"> <a data-name="@p.UninUser.User.UserName"  data-msgType="0" data-stateType="0" data-relateId="0"  data-id="@p.UninUser.User.UserId" href="#msg_box" data-toggle="modal">  发私信</a></span></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

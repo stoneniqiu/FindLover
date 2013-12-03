@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Upload";
+}
+<script src="../../Content/uploadify/jquery.uploadify.min.js"></script>
+<link href="../../Content/uploadify/uploadify.css" rel="stylesheet" />
+<h2>Upload</h2>
+ <script type="text/javascript"> 
+        $(document).ready(function()
+        {
+            $("#uploadify").uploadify({
+                height: 30,
+                swf: '../../Content/uploadify/uploadify.swf',
+                uploader: '/User/UpLoadPhoto',
+                width: 120
+            });
+        });  
+ </script>
+  <div id="fileQueue"></div>
+    <input type="file" name="uploadify" id="uploadify" />
+<p>
+    <a href="javascript:$('#uploadify').uploadifyUpload()">上传</a>| 
+    <a href="javascript:$('#uploadify').uploadifyClearQueue()">取消上传</a>
+</p>
+<input type="file"/>

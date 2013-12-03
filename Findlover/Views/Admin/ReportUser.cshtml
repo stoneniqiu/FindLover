@@ -1,0 +1,104 @@
+﻿@model Findlover.ViewModel.ReportDetailUser
+           
+<style>
+    .dtailbox{padding: 10px;}
+    .dtailbox img{width: 80px;height: 80px;vertical-align: baseline;float: left}
+    .userinfo{float: left;display: block;}
+    .boxline{clear: both;display: block;margin-bottom: 10px;}
+    .dtailbox table{clear: both; }
+    .userinfo span{margin-left: 5px;color: gray}
+    .foot button{margin-right: 20px;}
+    .allcheck{}
+    .bt-done{}
+    .forbidbt{}
+    .foot a{text-decoration: none;color: white;}
+</style>
+<script>
+    $(function () {
+
+        $(".more .allcheck").each(function (n) {
+            $(this).click(function () {
+                $(".dtailbox:eq(" + n + ") table tr input[type='checkbox']").attr("checked", $(this).is(':checked'));
+            });
+        });
+        
+        $(".more .bt-done").each(function (n) {
+            $(this).live("click", function () {
+                var checks = $(".dtailbox:eq(" + n + ") table tr input[type='checkbox']");
+                var num = 0;
+                 checks.each(function (i) {
+                    if (i > 0) {
+                        var isc = $(this).is(':checked');
+                        if (isc)//选中要处理的
+                        {
+                             num++;
+                             var id = $(this).attr("data-id");
+                             $.post("/Admin/DealReport", { "reportId": id }, function (data) {
+                                 if (data=="1") {
+                                     location.reload();
+                                 }
+                            });
+                        }
+                        if (num == 0) {
+                            alert("请选择要处理的举报");
+                        }
+                    }
+                });
+            });
+        });
+        $(".chat").each(function (n) {
+            $(this).click(function () {
+                var id = $(".chat a").eq(n).attr("data-id");
+                var name = $(".chat a").eq(n).attr("data-name");
+                $(".toname").html(name);
+                $(".toid").html(id);
+            });
+         });
+
+        $(".forbidbt").each(function() {
+            $(this).click(function() {
+                var isure = confirm("确定要封这个人号吗？");
+                if (isure) {
+                    var id = $(this).attr("data-userid");
+                    $.post("/Admin/ForbidUser", { userid: id }, function(data) {
+                        if (data == 1) {
+                            location.reload();
+                        } else {
+                            $(this).attr("disabled", "disabled").attr("title", "已经封禁过!");
+                            alert("已经封禁过！");
+                        }
+                   
+                    });
+                }
+            });
+        });
+
+    });
+</script>
+<div class="dtailbox">
+    <div class="boxline"><img src="@Model.UninUser.User.ImgUrl" />
+          <div class="userinfo" >   <span style="color: black">@Model.UninUser.User.UserName</span><span>@Model.UninUser.User.Age 岁</span><span>@Model.UninUser.User.Sex</span>
+          <span>注册时间：@Model.UninUser.User.RegisterTime</span><span>@Model.UninUser.BaseInfo.ResidenceProvince @Model.UninUser.BaseInfo.ResidenceCity</span></div><br/>
+          <div class="userinfo"><span>被检举次数：@Model.Sum.ReportedNum 次</span> <span style="color: red">@Model.Sum.UnDone 条未处理</span> <span>@Model.Sum.Done 条处理完毕</span></div>
+    </div>
+    @{
+        <table style="vertical-align: central"><tr><td>举报信息</td><td>补充</td><td>举报人</td><td>举报时间</td><td><input class="allcheck" type="checkbox"/></td></tr> 
+        @foreach (var sp in Model.Reports)
+        {
+         <tr><td>@Html.Raw(sp.Content)</td><td>@Html.Raw(sp.ReportRaw.Description)</td><td>@sp.ReportRaw.UserName</td><td>@sp.ReportRaw.ActionTime</td><td><input data-id="@sp.ReportRaw.Id" type="checkbox"/></td></tr>
+        }
+        </table>
+    }
+    <div class="foot">
+        <button class="btn btn-info btn-small">
+            <span class="chat">
+                <a data-name="@Model.UninUser.User.UserName" data-id="@Model.UninUser.User.UserId" href="#msg_box" data-toggle="modal"><i class="icon-envelope icon-white"></i>私信当事人</a>
+            </span>
+        </button> 
+        <button class="btn btn-warning btn-small forbidbt" data-userid="@Model.UninUser.User.UserId">封号</button><button class="btn btn-primary btn-small bt-done">处理完成</button>
+        <button class="btn btn-info btn-small">   <span class="chat" title="第一条信息的举报人">
+                <a data-name="@Model.Reports[0].ReportRaw.UserName" data-id="@Model.Reports[0].ReportRaw.UserId" href="#msg_box" data-toggle="modal"><i class="icon-envelope icon-white"></i>私信举报人</a>
+            </span></button>
+    </div>
+
+</div>

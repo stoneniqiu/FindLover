@@ -1,0 +1,80 @@
+﻿ 
+<style>
+    .mianbox {
+        width: 62%;
+        margin-top: 40px;
+        overflow: visible;
+        clear: both;
+        min-height: 70px;
+    }
+
+    .leftspan {
+        width: 30%;
+    }
+
+    .box {
+        padding-left: 15%;
+        position: relative;
+    }
+
+    .leftspan span {
+        position: absolute;
+        top: 50px;
+        left: 120px;
+        font-family: 楷体;
+        font-size: larger;
+    }
+    #myTab{margin-top: 20px;}
+    
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#mianNav>li").eq(10).addClass("active");
+        $('#myTab a').click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    })
+</script>
+<div class="container-fluid  background" style="margin: 0; padding: 0; min-height: 580px; margin-top: 50px; background-color: #f0f8ff">
+    <div class="box">
+        <div class="leftspan">
+            <span style=""> 
+                愿<br />
+                得<br />
+                一<br />
+                人<br />
+                  <img src="../../Content/Photos/like.gif" style="margin-left: -4px"><br />
+                ，<br />
+                白<br />
+                首<br />
+                不<br />
+                分<br />
+                离<br />
+             
+                </span>
+        </div>
+        <div class="">
+            <div class="mianbox" style="overflow: auto; margin-bottom: 10px;">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#trends" data-toggle="tab">喜欢我的人</a></li>
+                    <li><a href="#infos" data-toggle="tab">我喜欢的人</a></li>
+                    <li><a href="#dislike" data-toggle="tab">我不感兴趣的人</a></li>
+                </ul>
+                <div class="tab-content">
+                         <div id="trends" class="tab-pane fade in active">
+                    @Html.Action("PartLoverView")
+                </div>
+            
+                <div id="infos" class="tab-pane fade">
+                        @Html.Action("IloveView")
+                </div>  
+                 <div id="dislike" class="tab-pane fade">
+                        @Html.Action("IdisloveView")
+                </div>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿@model Findlover.Models.User
+
+@{
+    ViewBag.Title = "修改头像";
+}
+
+<style>
+     .background {
+         background-color:#Ddd;
+          /*background: url(../../Content/backgroundimg/bf.jpg) repeat;*/
+         min-height: 400px;
+    }
+     .box{ margin-top: 20px;box-shadow: 0 0 12px;background-color: white;opacity: 1;min-height: 300px;padding: 30px;}
+     .paper{ background-color: red;width: 50px;width: 100%;}
+     .pager>span{font-size: 1.5em;font-family: Microsoft JhengHei;border-bottom: 2px solid #00bfff;padding-bottom: 5px;float: left;}
+     dt{ font-family: Microsoft JhengHei; }
+     dd{color: #999}
+     .load{ width: 320px;height: 320px;background-color: #ccc;border-radius: 5px;float: left;vertical-align: central;line-height: 300px;}
+     .demo{width: 200px;height:200px;margin-left: 10px; 
+         border: 5px;
+     }
+     .mindemo{ width: 80px;height: 80px; margin-left: 10px;margin-top: 20px;}
+     .imgbt{ background-color: black;width: 150px;height: 50px;border-radius: 5px;color: white;text-align: center;line-height: 50px;vertical-align: central;
+         margin-top: 40%;margin-left: 25%;
+     }
+     .imgbt:hover{ background-color: #696969;cursor: pointer;}
+     .mindemo img,.demo img{ width: 100%;height: 100%;box-shadow: 0 0 6px gainsboro;}
+     input[type='file']{ display: none;} form{ margin-top: 10px;} form input[type="submit"]{ display: none;}
+                                          
+</style>
+<div class="container-fluid  background" style="margin-top:50px;margin-left: 0;margin-right: 0;"  >
+    <div class="row-fluid">
+         <div class="span2"></div>
+        <div class="span8">
+            <div class="box">
+                 上传不了？点击这里  <a href="../../ImgUpload.aspx">../../ImgUpload.aspx</a>
+                <div class="pager" style="border-bottom: 1px dotted #dddddd"><span>修改头像</span></div>
+                <dl>
+                    <dt> 亲们:第一眼，灰常重要，所以记得上传清晰美观的个人近照(<span style="color: #ff69b4">非个人照不会通过审核,功能会受到影响</span>).</dt>
+                    <dd>支持jpg,png,gif,bmp格式的图片,目前不支持截图，烦请朋友们自己先把头像裁剪成<b>方形</b></dd>    
+                        <dd>单张图片请在10k~10M之间 </dd> 
+                </dl>
+                <div style="overflow: auto">
+                    <div class="load">
+                        <div class="imgbt">
+                            <i class="icon-plus icon-white"></i>
+                            上传图片
+                        </div>
+                    </div> 
+                    <div style="float: left;width: 1px;height: 320px;border-left:1px dashed gainsboro;margin-left: 10px;margin-top: 0px;"></div>
+                    <div style="float: left">
+                        <div class="demo"><img alt="" src="@Model.ImgUrl" /></div>
+                        <div class="mindemo"><img alt="" src="@Model.ImgUrl" /></div> 
+                    </div>
+                    <div style="display: block;height: 1px ;width: 100%;opacity: 0"></div>
+                       
+                </div>
+               
+                <form action="/User/UpLoadPhoto" method="POST" enctype="multipart/form-data" name="Form1" id="Form1">
+                    <input type="file" id="file" name="file"   required="required" />
+                    <input  type="submit" name="subt" value="上传图片" />
+                    <div id="showimg"></div>
+                </form>
+                <button id="save" title="先上传图片" disabled="disabled" class="bt btn btn-large btn-primary">上传,完成</button>
+            </div>
+            <script type="text/javascript">
+                $(function() {
+                    $(".imgbt").click(function() {
+                        $("#file").click();
+                        var stm = setInterval(function () {
+                            var str = $("#file").val();
+                            if (str != "") {
+                                clearInterval(stm);
+                                $("#Form1 input[type='submit']").click();
+                                $("#save").removeAttr("disabled");
+                            }
+                        }, 500);
+                    });
+                    
+                    $('#Form1').ajaxForm({
+                        success: function (data) {
+                            //$("#showimg").html(data);
+                            $(".demo,.mindemo").html(data);
+                            $("#file").val("");//
+                        }, complete: function (xhr) {
+                            $("#file").val("");
+                        //    alert(xhr.responseText);
+                        }
+                    });
+
+                    $("#save").click(function() {
+                        $.post("/User/SaveImg", function (data) {
+                            if (data == "1") {
+                                window.open("/User/Index", '_self');
+                            } else {
+                                alert("失败，请重试！");
+                                $("#save").attr("disabled", "disabled");
+                            }
+                           
+                        });
+                    });
+                });
+            </script>
+        </div> 
+   
+    </div> 
+</div>
+ 

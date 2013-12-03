@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Findlover.Models.Topic>
+<style>
+      table td{color:  gray}
+</style>
+ <table class="table">  
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Title,"Detail",new{topicId=item.Id})
+        </td>
+     <td>
+          <a href="/User/Index?id=@item.UserId">@item.UserName</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReplyCount)回应
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LikeCount)喜欢
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpDataTime)
+        </td>
+
+         
+    </tr>
+}
+</table>

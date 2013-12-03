@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using Findlover.Migrations;
+
+namespace Findlover.Models
+{
+    public class LoveDb:DbContext
+    {
+        private const string DbNameOrDbConnectionstring =
+<<<<<<< HEAD
+       // "Data Source=CNWJ6IAPC006\\SQLEXPRESS;Initial Catalog=LoveDB;User ID=sa;Password=666666;Persist Security Info=True";
+          "Data Source=RJ-Stone-PC;Initial Catalog=LoveDB;User ID=sa;Password=123sa;Persist Security Info=True";  
+=======
+        "Data Source=CNWJ6IAPC006\\SQLEXPRESS;Initial Catalog=LoveDB;User ID=sa;Password=666666;Persist Security Info=True";
+          //"Data Source=RJ-Stone-PC;Initial Catalog=LoveDB;User ID=sa;Password=123sa;Persist Security Info=True";  
+>>>>>>> 000fda1f9d544a62f17670bb5260ad72f8c9aa93
+       
+
+        public DbSet<BaseInfo> BaseInfos { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Requirement> Requirements { get; set; }
+        public DbSet<DetailInfo> DetailInfos { get; set; }
+        public DbSet<LoveView> LoveViews { get; set; }
+        public DbSet<InfoStatistic> InfoStatistics { get; set; }
+        public DbSet<UserHot> UserHots { get; set; }
+        public DbSet<Praise> Praises { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<Iamgbox> Iamgboxes { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<LoginLog> LoginLogs { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Hello> Hellos { get; set; }
+        public DbSet<RoleLog> RoleLogs { get; set; }
+        public DbSet<Authority> Authoritys { get; set; }
+        public DbSet<AdminStatistic> AdminStatistics { get; set; }
+        public DbSet<VisitLog> VisitLogs { get; set; }
+        public DbSet<LastState> LastStates { get; set; }
+
+
+        public LoveDb() : base(DbNameOrDbConnectionstring)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LoveDb, Configuration<LoveDb>>());
+        }
+    }
+}

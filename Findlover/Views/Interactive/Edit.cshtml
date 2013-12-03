@@ -1,0 +1,127 @@
+﻿@model Findlover.Models.Topic
+
+@{
+    ViewBag.Title = "意中人 修改topic";
+}
+ <link href="../../Content/CSS/topicnav.css" rel="stylesheet" />
+<style>
+  #Title{width: 300px;}
+  .edit {     }.edit ul{margin: 0;} .kendo label{display: inline;padding-left: 10px;}
+  .editleft{width: 100px;height: 30px;display: inline;margin-right: 10px;} #templateTool{width: 80px;}.pic{padding: 5px;} .pic:hover{background-color: #b0c4de;cursor: pointer}
+ .editline{margin-top: 10px;} .editefoot{display: none}.errorinfo{display: none;color: red}
+  
+</style>
+@Html.Action("TopicNav")
+<div class="mianbody">
+    <div class="edit">
+        <h4>发起我的Topic</h4>
+        <form action="/Interactive/Edit" id="Topicform" method="POST">
+            <div><span class="editleft">标题</span><input type="text" name="Title" value="@Model.Title" required="required" id="Title" /></div>
+            <input type="hidden" name="Id" value="@Model.Id"/>
+            <div class="kendo">
+                @(Html.Kendo().Editor()
+                  .Name("Content")
+                  .HtmlAttributes(new { style = "width: 500px;height:400px; " })
+                  .Tools(tools => tools
+                      .Clear()
+                       .Bold()
+                      .Italic()
+                      .Underline()
+                      .FontColor()
+                       .BackColor()
+                      .CustomTemplate(ct => ct.Template(  
+                         "<span class='pic'title='上传图片'><i class='icon-picture'></i></span>"))
+                  )
+              .Value(@<text> @Html.Raw(Model.Content)  </text>))
+            </div>
+            <div class="editline">
+                <input type="submit" id="edsub" value="提交" class="btn"><span class="errorinfo"></span>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="editefoot">
+    <form action="/User/UploadTextPhoto" method="POST" enctype="multipart/form-data" id="imageform" name="imageform">
+        <input type="file" id="ImgInsert" name="file" required="required" />
+        <input type="submit" name="subt" value="submit" />
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        //提交topic--------------------------------------
+        var options = {
+            beforeSend: function () {
+                var text = $.trim($("#Content").val());
+                if (text == "") {
+                    updateTopic("亲,只有标题是不行的哦");
+                    return false;
+                }
+                if (text.length < 5) {
+                    updateTopic("亲,再说的详细点吧");
+                    return false;
+                }
+                $("#edsub").attr("disabled", "disabled");
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (parseInt(data) > 0) {
+                    window.open("/Interactive/Detail?topicId=" + data, "_self");
+                } else {
+                    var editor = $("#Content").data("kendoEditor");
+                    editor.value("");
+                    $("#edsub").removeAttr("disabled");
+                    updateTopic(data);
+                }
+            }, complete: function (xhr) {
+                $("#edsub").removeAttr("disabled");
+            }
+        };
+
+        $('#Topicform').submit(function () {
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+        //插入图片--------------------------------------
+        $(".pic").click(function () {
+           $("#ImgInsert").click();
+            var stm1 = setInterval(function () {
+                var imgstr = $("#ImgInsert").val();
+                if (imgstr != "") {
+                    clearInterval(stm1);
+                    $("#imageform input[type='submit']").click();
+                }
+            }, 500);
+            return false;
+        });
+
+
+        $('#imageform').ajaxForm({
+            success: function (data) {
+                $("#ImgInsert").val("");//
+                var editor = $("#Content").data("kendoEditor");
+                var txte = $("#Content").val() + data;
+                editor.value(txte);
+              }, complete: function (xhr) {
+                  $("#ImgInsert").val("");
+            }
+        });
+
+        //信息提示--------------------------------------
+        function updateTopic(data) {
+            $(".errorinfo").show().html(data);
+            var stt = setTimeout(function () {
+                $(".errorinfo").fadeOut();
+            }, 2000);
+        }
+
+
+
+
+        //$("#templateTool").kendoDropDownList({
+        //    change: function (e) {
+        //        $("#Content").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+        //    }
+        //});
+    });
+</script>
+

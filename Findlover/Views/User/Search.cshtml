@@ -1,0 +1,340 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+<script src="../../Content/JS/search.js"></script>
+<link href="../../Content/CSS/search.css" rel="stylesheet" />
+<script src="../../Content/JS/form.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#mianNav>li").eq(2).addClass("active");
+    })
+</script>
+<div class="container-fluid  background" style="margin:0;padding: 0;margin-top:50px;background-color: #f0f8ff"  >
+    <div class="box">
+        <div class="mide">
+            <div class="mianbox">
+                <div id="selected" style="overflow: visible">
+                    <div class="selettitle">已选条件: </div>
+                    <div class="selectedconditon">
+                        <div class="spanbox addselete" style="min-width: 108px;margin-top: 0px;">
+                            <span><span>(住在)苏州市</span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span>
+                            <div class="spanhide">
+                                <p>请选择所在地</p>
+                                <div class="linewarp" style="width: 120px;">
+                                    <select class="">
+                                        <option>苏州市</option>
+                                    </select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="spanbox addselete" style="min-width:90px;margin-top: 0px;">
+                            <span><span>18到30岁</span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span>
+                            <div class="spanhide">
+                                <p>请选择所在地</p>
+                                <div class="linewarp" style="width: 170px;">
+                                    <select class="agesl" style="width: 70px;">
+                                    </select>  
+                                    至
+                                    <select class="agesl" style="width:70px; ">
+                                    </select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                          
+                        <div class="spanbox addselete hideselect" style="margin-top: 0px;max-width: 110px;width: auto; ">
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p>请选择学历</p>
+                                <div class="linewarp" style="width: 170px;">
+                                    <select class="edusl"></select> 至 <input id="Educationcheck1" type="checkbox"/><span>及以上</span> 
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="spanbox addselete hideselect" style=" margin-top: 0px;max-width: 110px;width: auto;" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 100px;">请选择住房情况</p>
+                                <div class="linewarp">
+                                    <select class="housl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox addselete hideselect" style="max-width:1105px;margin-top: 0px;width: auto" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 90px;">请选择月收入</p>
+                                <div class="linewarp">
+                                    <select class="incomesl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox addselete hideselect" style="max-width:90px;margin-top: 0px;width: auto" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 100px;">请选择购车情况</p>
+                                <div class="linewarp">
+                                    <select class="carsl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox addselete hideselect" style="max-width:130px;margin-top: 0px;width: auto" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 180px;">请选择身高</p>
+                                <div class="linewarp">
+                                    <select class="heightsl"></select> 至 <select class="heightsl"></select> 
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="spanbox addselete hideselect" style="max-width:90px;margin-top: 0px;width: auto" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 80px;">请选择星座</p>
+                                <div class="linewarp">
+                                    <select class="consl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox addselete hideselect" style="max-width:155px;margin-top: 0px; width: auto;" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 180px;">请选择籍贯</p>
+                                <div class="linewarp">
+                                    <select class="prosl"></select> <select class="citiysl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox addselete hideselect" style="min-width:50px;margin-top: 0px;" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 80px;">请选择民族</p>
+                                <div class="linewarp">
+                                    <select class="peoplesl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox addselete hideselect" style="max-width:115px;margin-top: 0px;width: auto" >
+                            <span><span></span><i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i>
+                                <samp> &times;</samp>
+                            </span><br/>
+                            <div class="spanhide">
+                                <p style="width: 100px;">请选择当前状态</p>
+                                <div class="linewarp">
+                                    <select class="stasl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <span class=""><span> </span><i class="icon-chevron-down icon-white" style="display: none"></i></span>
+                    
+                </div>
+                
+                <div class="line"></div>
+
+                <div id="condition"> 
+                    <div class="selettitle"style="margin-top: 10px;">更多搜索:</div>
+                    <div class="conditon">
+                        <div class="spanbox" >
+                            <span>学历<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p>请选择学历</p>
+                                <div class="linewarp" style="width: 170px;">
+                                    <select class="edusl"></select> 至 <input id="Educationcheck" type="checkbox"/><span>及以上</span> 
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="spanbox" >
+                            <span>住房<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 100px;">请选择住房情况</p>
+                                <div class="linewarp">
+                                    <select class="housl" style="width: 90px"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox" style="width: 80px;">
+                            <span>月收入<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 90px;">请选择月收入</p>
+                                <div class="linewarp">
+                                    <select class="incomesl" style="width: 90px"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox" >
+                            <span>购车<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 100px;">请选择购车情况</p>
+                                <div class="linewarp">
+                                    <select class="carsl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox">
+                            <span>身高<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 180px;">请选择身高</p>
+                                <div class="linewarp">
+                                    <select class="heightsl"></select>至 <select class="heightsl"></select>    
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="spanbox" >
+                            <span>星座<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 80px;">请选择星座</p>
+                                <div class="linewarp">
+                                    <select class="consl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox" >
+                            <span>籍贯<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 180px;">请选择籍贯</p>
+                                <div class="linewarp">
+                                    <select class="prosl"></select> <select class="citiysl"></select>   
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox" style="">
+                            <span>民族<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 80px;">请选择民族</p>
+                                <div class="linewarp">
+                                    <select class="peoplesl"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="spanbox" style="width: 100px; "   >
+                            <span>当前状态<i class="icon-chevron-down"></i><i class="icon-chevron-up" style="display: none"></i></span><br/>
+                            <div class="spanhide">
+                                <p style="width: 100px;">请选择当前状态</p>
+                                <div class="linewarp">
+                                    <select class="stasl" style="width: 100px"></select>  
+                                </div>
+                                <div class="">
+                                    <a class="btn "  href="javascript:;">确认</a>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+                </div>
+            </div>
+            <div class="mianbox" id="userpage" style="overflow: auto;margin-bottom: 10px;">
+                @Html.Action("UserPage")
+            </div>
+        </div>
+          <div class="rightspan">@Html.Action("PersonalInfo","User")</div>
+    </div>
+
+</div>
+
+<div class="hide">
+       @using (Html.BeginForm("UserPage", "User", FormMethod.Post, new {name = "Form1", id = "Form1"}))
+       {
+           <input type="hidden" name="ResidenceCity" id="ResidenceCity" />
+           <input type="hidden" name="AgeUp" id="AgeUp" />
+           <input type="hidden" name="AgeLow" id="AgeLow" />
+            <input type="hidden" name="Education" id="Education" />
+           <input type="hidden" name="MonthlyIncome" id="MonthlyIncome" />
+           <input type="hidden" name="Housing" id="Housing" />
+           <input type="hidden" name="Car" id="Car" />
+           <input type="hidden" name="HightUp" id="HightUp" />
+           <input type="hidden" name="HightLow" id="HightLow" />
+           <input type="hidden" name="Constellation"  id="Constellation" />
+           <input type="hidden" name="NativePlace" id="NativePlace"  />
+           <input type="hidden" name="People"id="People" />
+           <input type="hidden" name="State"id="State" />
+           <input type="submit" id="goSearch" />
+       }
+</div>

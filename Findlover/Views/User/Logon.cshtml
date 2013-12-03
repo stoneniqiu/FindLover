@@ -1,0 +1,65 @@
+﻿@using Findlover.Models
+@model Findlover.Models.LogOnModel
+
+@{
+  
+    Layout = null;
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<link href="../../Content/CSS/Logon.css" rel="stylesheet" />
+<script src="../../Content/JS/logon.js"></script>
+<script src="../../Content/JS/form.js"></script>
+<div class="title">
+    <span class="bt">意中人</span><span class="st">不再让你孤单！</span>
+</div>
+<div class="loginbox">
+    @using (Html.BeginForm("Logon", "User", FormMethod.Post, new {name = "Form1", id = "Form1" }))
+    {
+        <ul>
+            <li style="height: 20px;"><span class="text-error"></span></li>
+            <li> <input type="text" required="required" name="username" placeholder="your email or your name"/></li>
+            <li> <input type="password" required="required"  name="password" placeholder="your code"/></li>
+            <li> <input type="checkbox" checked="checked" id="RememberMe"/>
+                <label for="RememberMe">下次自动登录</label> <a href="#" style="float: right; ">忘记密码？</a>
+                <input type="hidden"  id="ReMe" name="RememberMe" value="true"/>
+            </li> 
+            <li> <input type="submit" class="button" id="login" value="登录"/></li>
+            <li> @Html.ActionLink("注册>>","Register","User") </li>
+           
+        </ul>
+    }
+</div>
+<script>
+    $("#RememberMe").click(function () {
+        $("#ReMe").val($(this).is(':checked'));
+    });
+    $("#login").click(function() {
+        $(this).val("正在登录...");
+    });
+
+    $(document).ready(function () {
+        // bind form using ajaxForm
+        var options = {
+            dataType: 'json',
+            success: processJson
+        };
+        $('#Form1').submit(function () {
+            $(this).ajaxSubmit(options);
+            $("#login").attr("disabled", "disabled");
+            return false;
+        });
+    });
+    function processJson(data) {
+        
+        if (data != "密码输错了吧~" && data != "用户名或邮箱还未注册哦~" && data != "账户已被封禁,不能登陆！") {
+            window.open("/User/Index/" ,'_self');// + parseInt(data)
+        } else {
+            $(".text-error").html(data).fadeIn();
+            $("#login").val("登录").removeAttr("disabled");
+            var st = setTimeout(function () {
+                $(".text-error").hide();
+            }, 3000);
+        }
+     
+    }
+</script>

@@ -1,0 +1,71 @@
+﻿ .mianbox {
+     -webkit-box-shadow: 0 0 12px gray;
+        -ms-box-shadow: 0 0 12px gray;
+        box-shadow: 0 0 12px gray;padding: 30px;  
+        -ms-border-radius: 5px;
+        border-radius: 5px;width: 100%;margin-top: 40px;overflow:visible;clear: both;
+        min-height:130px;
+     -ms-opacity: 1;
+     opacity: 1;
+     background-color: white;
+ }
+
+ .rightspan {
+        float: left;width:22%;background-color: white;margin-left: 90px;
+        -ms-opacity: 1; 
+        opacity: 1;margin-top: 40px;
+    }
+ .mide{width: 60%;height: auto; float: left; }
+ .searchbox{ margin-top: 40px;width: 100%;}
+    .line{ border-bottom: 1px dashed gainsboro;margin-top: 40px;margin-bottom: 10px;clear: both;display: block;}
+    .leftspan{width: 30%}
+    .imgwarp{ background-color: #f5fffa;padding-bottom: 5px;overflow: hidden; }  
+    .imgwarp img{ width: 150px; height: 150px;margin-bottom: 5px;} .imgwarp a{ text-decoration: none;}
+    .imgbox{margin-top: 10px;float: left;margin-left: 20px;cursor: pointer; }
+    .box{ padding-left: 15%;}
+    .age{float: left;color: gray;padding-left: 20px;} 
+    .city{float: right;color: gray;padding-right: 20px;}
+    .btnholder{ display: block;margin-top: 10px;height: 25px;overflow: visible;position: relative;}
+    .like{ background-color:#ff69b4; text-align: center;margin: 10px;padding: 5px 6px;display: none;width: 120px;height: 50px;overflow: hidden}
+    .like:hover{background-color: #ffb6c1}
+    .likeinfo {
+        color: #008000;position: absolute;border: 1px solid gainsboro;left: 0;top: 0;z-index: 1;padding: 5px;background-color: white;
+        -ms-opacity: 1;
+        opacity: 1;
+      display: none;
+    }
+
+ .chat{ background-color: #40e0d0;text-align: center;margin: 10px;padding: 5px 6px;display: none}
+    .chat:hover{background-color: #afeeee}
+    .imgbox span{  font-size: small;}
+    .imgbox:hover>.imgwarp {
+        -webkit-box-shadow: 0 0 8px gray;
+        -ms-box-shadow: 0 0 8px gray;
+        box-shadow: 0 0 8px gray;
+    }
+    .imgbox:hover>.btnholder>.chat, .imgbox:hover>.btnholder>.like{ display: inline;}
+    /*搜索部分*/
+
+      .spanbox{  float: left; width:70px;overflow: visible;margin: 0;margin-right: 10px;margin-top: 10px;height: 20px;position: relative;}
+     .conditon .spanbox>span,.selectedconditon .spanbox>span{  padding:3px 10px;cursor: pointer;margin-top: 5px; 
+        font-size: small;margin-top: 2px;
+    }
+      .conditon .spanbox>span{ background-color: white;border: 1px gainsboro solid;} .conditon .spanbox>span:hover{background-color: #afeeee}
+       .conditon .spanbox>span i{ margin-left: 5px;}
+    .selettitle{color: gray;width:70px;float: left; height: 40px;  }
+    .spanhide {
+        padding: 10px; margin: 0;z-index: -1; display: none;border: 1px gainsboro solid;
+        -ms-opacity: 1;
+        opacity: 1;background-color: white;background:-webkit-linear-gradient(#fff,#f5fffa);
+    }
+
+    .spanhide p{ color: gray; font-size: small;margin: 0;padding: 5px;}
+    .spanhide select{ font-size: small;height: 22px;padding: 0;vertical-align: baseline;width:80px;text-indent: 3px;color: black; }    
+    .linewarp{display:block;color: gray;} .linewarp input[type='checkbox']{ vertical-align: baseline}  .linewarp span{ margin-left:5px;}
+    .addselete{background-color: #afeeee;border: 1px solid white;}
+    .seletclickclass{ background-color: white;border-top: 1px solid gainsboro;border-left: 1px solid gainsboro;border-right:1px solid gainsboro}
+     .selectedconditon samp{ color: gray;font-weight: bold;}
+    .selectedconditon samp:hover{ color: black;} 
+    .hideselect{display: none}  .selectedconditon>.spanbox{margin-bottom: 10px;}
+     .selectedconditon>.spanbox:hover{background-color: #f0ffff  }
+     .edusl{}.housl{ }.carsl{}.incomesl{}.heightsl{}.consl{}.prosl{} .citiysl{}.stasl{}.peoplesl{} .agesl{}

@@ -1,0 +1,216 @@
+﻿    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <script src="../../Scripts/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="../../Scripts/jquery-1.8.3.js"></script>
+    <link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/CSS/layout.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <link href="@Url.Content("~/Content/kendo/2012.2.710/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2012.2.710/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2012.2.710/kendo.silver.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2012.2.710/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2012.2.710/kendo.aspnetmvc.min.js")"></script>
+    <script src="../../Content/JS/form.js"></script>
+    <script src="../../Content/JS/master.js"></script>
+       <!--[if lte IE 6]>
+  <!-- bsie js 补丁只在IE6中才执行 -->
+    <link href="../../Content/bootstrap/css/bootstrap-ie6.min.css" rel="stylesheet" />
+         <link href="../../Content/bootstrap/css/ie.css" rel="stylesheet" />
+    <![endif]-->
+     <!--[if lte IE 6]>
+         <!-- bsie js 补丁只在IE6中才执行 -->
+         <script src="../../Content/bootstrap/bootstrap-ie.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="navbar navbar-fixed-top  navbar-inverse navbarmodify">
+        <div class="navbar-inner ">
+            <div style="margin-left: 15%">
+                <ul id="mianNav" class="nav">
+                    <li class="active"><a href="/Home/Index"><span style="font-family: 楷体; font-size: 1.5em; color: #fff0f5; text-shadow: 0 0 2px white">意中人</span></a></li>
+                    <li class=""><a href="/Recommend/Index"><span>推荐</span></a></li>
+                     
+                    <li class=""><a href="/User/Search"><span>搜索</span></a></li>
+                  
+                    <li class=""><a href="/State/Index"><span>动态</span></a></li>
+                    <li class=""><a href="/User/Index"><span>个人主页</span></a></li>
+                    <li class="divider-vertical"></li>
+                    <li class=""><a href="/Interactive/Index"><span>单身部落</span></a></li>
+                    <li id="adminli"><a href="/Admin/Index"><span>后台管理<i class="icon-edit icon-white"></i></span></a></li>
+                    <li class="divider-vertical"></li>
+                    <li class=""><a href="#"><span>寻芳踪<span class="msgTag" title="你有新消息">12</span>
+                    <i class=" icon-chevron-down icon-white" style="vertical-align: bottom; -ms-opacity: 0.7; opacity: 0.7"></i>
+                    </span></a>
+                        <ul id="subul">
+                            <li><a href="/Message/CheckPrivateMessage">查看私信</a><span class="msgTag1"></span></li>
+                            <li><a href="/User/PariseHelloView">新增"赞"</a><span class="msgTag1">11</span></li>
+                            <li><a href="/Recommend/Visited">谁去谁来</a><span class="msgTag1">a</span></li> 
+                            <li><a href="/State/MyLoverView">新增喜欢</a><span class="msgTag1">11</span></li>
+                            <li><a href="/Message/CheckMessageRecords">系统通知</a><span class="msgTag1"></span></li>
+                            <li style="border-top: 1px solid #a9a9a9;">查看全部消息</li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><span>用户 
+                                        <i class=" icon-chevron-down icon-white" style="vertical-align: bottom; opacity: 0.7"></i></span></a>
+                        <ul>
+                            <li>修改密码</li>
+                            <li>关闭资料</li>
+                            <li style="border-top: 1px solid #a9a9a9;"><a href="/User/LogOff">退出</a></li>
+                        </ul>
+                    </li>
+                   <li id="loginli" class="active"><a href="/User/Logon"><span>登录</span></a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div id="msg_box" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>发送私信</h4>
+        </div>
+        <div class="modal-body">
+            <div>收件人：<span class="toname"></span><span class="toid"></span></div>
+            <textarea class="msg_content"></textarea>
+            <div class="message1"><span>剩余<i>400</i>字</span><span class="error"></span></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" aria-hidden="true">发送</button>
+        </div>
+    </div>
+    <div id="report_box" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>拉黑/举报该用户</h4>
+        </div>
+        <div class="modal-body">
+            <div class="reportbox">
+                <div>将<span id="reportedname"></span>拉黑</div>
+                <div class="reportinfo">拉黑<span></span>之后,你们的喜欢关系会自动解除，<span></span>不能再喜欢、赞或者私信你</div>
+                <div class="divline"></div>
+            </div>
+            <div class="reportbox">
+                <div class="divrow">
+                    <div>
+                        <input type="checkbox" name="IsReport" id="IsReport" /><label style="display: inline" for="IsReport">同时我要向管理员举报<span id="reportName"></span><span id="reportType"></span></label>
+                    </div>
+                    <div id="reportcontent"></div>
+                </div>
+                <div class="divrow">
+                    举报类型:
+                    <ul id="reul">
+                        <li>
+                            <input type="radio" name="reportType" tabindex="1" id="Pornographic" /><label for="Pornographic">色情污秽</label>
+                            <input name="reportType" type="radio" id="FakeMssage" /><label for="FakeMssage">资料虚假或冒用</label>
+                            <input name="reportType" type="radio" id="Harass" /><label for="Harass">骚扰</label></li>
+                        <li>
+                            <input type="radio" name="reportType" id="Advertisement" /><label for="Advertisement">广告</label>
+                            <input name="reportType" type="radio" id="Swindle" /><label for="Swindle">诈骗或虚假信息</label>
+                            <input id="Others" name="reportType" type="radio" tabindex="" /><label for="Others">其他理由</label></li>
+                    </ul>
+                    <input type="text" id="reportdes" placeholder="补充说明：" />
+                </div>
+             
+               
+               
+            </div>
+        </div>
+        <div class="modal-footer">
+            <span class="reportmessage"></span>
+            <button class="btn btn-warning "   id="reportbt">提交</button>
+            <button class="btn" id="reportcancel">取消</button>
+            <input type="hidden" id="reporttype" data-relateid="" />
+        </div>
+    </div>
+    <div id="imgupload" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>上传图片</h4>  
+        </div>
+        <div class="modal-body">
+            <div class="uploadbox" data-count="0" style="display: inline;">
+                <span class="closespan" title="删除照片">&times;</span>
+                <div class="imgcontainer">
+                    <div class="add">+</div>
+                    <div class="stt">点击上传</div>
+                </div>
+                <span class="infospan">
+                    <img src='../../Content/Photos/loading.gif' />正在上传...</span>
+            </div> 
+            <div class="uploadbox" data-count="0"  >
+                <span class="closespan" title="删除照片">&times;</span>
+                <div class="imgcontainer">
+                    <div class="add">+</div>
+                    <div class="stt">点击上传</div>
+                </div>
+                <span class="infospan"> <img src='../../Content/Photos/loading.gif' />正在上传...</span>
+            </div> 
+            <div class="uploadbox"data-count="0" >
+                <span class="closespan" title="删除照片">&times;</span>
+                <div class="imgcontainer">
+                    <div class="add">+</div>
+                    <div class="stt">点击上传</div>
+                </div>
+                <span class="infospan"> <img src='../../Content/Photos/loading.gif' />正在上传...</span>
+            </div> 
+            <div class="uploadbox"data-count="0"  >
+                <span class="closespan" title="删除照片">&times;</span>
+                <div class="imgcontainer">
+                    <div class="add">+</div>
+                    <div class="stt">点击上传</div>
+                </div>
+                <span class="infospan"> <img src='../../Content/Photos/loading.gif' />正在上传...</span>
+            </div> 
+            <div class="inputdiv"><input type="text" disabled="disabled" id="Remark" name="Remark" placeholder="补充说明下~"/></div>
+        </div>
+        <div class="modal-footer">
+            上传大小在8k-10M之间 <span class="imguploadmessage"></span>
+            <button class="btn btn-success "  disabled="disabled"   id="imgsubmit">发布</button>
+            <form action="/User/UpLoadPhoto" method="POST" enctype="multipart/form-data" name="ImgForm" id="ImgForm">
+                <input type="file" name="file" id="imgFlie"  required="required" />
+                <input type="submit" name="subt" value="上传图片" />
+            </form>
+        </div>
+   
+    </div>
+    <div style="width: 100%;min-height: 480px;height: auto"> 
+    @RenderBody()
+        </div>
+    <div id="CarouselBox" class="modal hide fade " style="width: 50%;margin: 0;position: absolute; left: 25%"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="carclose">&times;</div>
+        <div id="myCarousel" class="carousel slide">
+          <ol class="carousel-indicators">
+               @*   <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>*@
+        </ol>
+          <div class="carousel-inner">
+                  @*<div class="item active">
+                      <img src="../../Content/backgroundimg/b1.jpg" />
+                    <div class="carousel-caption">
+                      <h4>First Thumbnail label</h4>
+                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+                  </div>*@
+                  
+                </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+       </div>
+    </div>
+    <script>
+        $.bootstrapIE6(el);
+    </script>
+    <footer style="color: gray;text-align: right;font-size: x-small;margin-right: 10px;">
+        <a href="http://www.cnblogs.com/stoneniqiu" title="谁是菜鸟？">@@2013菜鸟制作~</a>
+    </footer>
+         
+</body>
+</html>

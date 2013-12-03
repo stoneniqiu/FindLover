@@ -1,0 +1,41 @@
+﻿@model Findlover.ViewModel.PersonInfo
+<style> 
+    .combox{padding: 10px;font-family: Microsoft JhengHei;box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7)  ,0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset; }
+    .user img{width: 80px;height: 80px;}
+    .user a,.infotag{text-decoration: none;display: inline;cursor: pointer;} 
+    .infotag:hover{text-decoration: none;}
+    .pinfo,.infotag{float: right;font-size: small;margin-left: 5px;}
+    .user>span{font-size: 1.5em;font-weight: bold;}
+    .info ul{margin:0} 
+    .info{margin-top: 10px;background-color:#fffff0;padding: 5px;}
+             
+    .info ul li{margin-bottom:5px;}
+    .infotitle{font-size: medium;font-weight: bold;color: #999}
+    .persent{font-size: 1.5em;color: #ff00ff;}
+ 
+</style>
+@{
+    var user = Model.Myself.User;
+    }
+
+<div class="combox">
+    <div class="user">
+        <a href="/User/Index?id=@user.UserId"><img src="@user.ImgUrl"/></a>
+        <span>@user.UserName</span>
+    </div>
+    <div class="info">
+        <ul>
+            <li><span class="infotitle">资料完整度</span> <a class="infotag" href="/User/EditIndex?index=1"><i class="icon-pencil"></i>完善资料</a></li>
+            
+            <li><span class="persent">@Math.Round(Model.Persent*100,0)%</span> <span class="pinfo">@Model.Info</span></li>
+            <li><span class="infotitle">我的动态</span>
+                <a class="infotag" href="/User/EditIndex?index=2" title="发布动态"><i class="icon-edit"></i></a>
+                <a class="infotag" id="imgupload"  href="#imgupload" data-toggle="modal" title="上传照片"><i class="icon-camera"></i></a>  </li>
+            <li><span class="infotitle">我的缘分</span>
+                <a class="infotag" href="/Recommend/Visited">@Html.Raw("被访问"+Model.Visitcount)</a>   
+                 <a class="infotag" href="/State/MyLoverView">@Html.Raw("被喜欢"+Model.LoveMeCount)</a>
+                 <a class="infotag" href="/State/MyLoverView">@Html.Raw("喜欢"+Model.IloveCount)</a>
+            </li>
+        </ul>
+    </div>
+</div>

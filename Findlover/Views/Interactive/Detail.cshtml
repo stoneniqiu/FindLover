@@ -1,0 +1,96 @@
+﻿@model Findlover.ViewModel.TopicUser
+
+@{
+    ViewBag.Title = "意中人话题："+Model.Topic.Title;
+}
+<link href="../../Content/CSS/topicnav.css" rel="stylesheet" />
+<style>
+    .topic{font-size: small;overflow: auto;clear: both;height: auto;min-height: 200px;} 
+    .imgtopic{width: 80px;height: 80px;float: left;color: gray} 
+    .imgtopic img{max-height: 80px;max-width: 80px}
+    .topicontent{float: left;width:80%;margin-left: 10px; }
+    .subtime{color: green;float: right;margin-right: 20px;}
+    .topfoot #enjoy{float: right;color: gray;margin-right: 20px;font-size: small;cursor: pointer;padding: 5px;border-radius: 4px;background-color: #fff0f5;border: 1px solid white}
+    .topfoot #enjoy:hover{background-color: #fff0f5;border-color:#ffc0cb} 
+    .topfoot #enjoy i{font-size:20px;vertical-align: bottom;color: #999;font-family: Arial}
+    .topfoot{ clear: both;overflow: auto;height: 25px;padding: 5px;height: auto ; }
+    .topfoot #enjoy:hover>i{color:#ff00ff}    
+      .content img{max-height: 300px;max-width:500px;}    
+     #enjoycount{float: right;vertical-align: bottom;padding: 10px;}     #enjoycount a{padding: 0 5px;}    
+     #enjoycount a:hover{cursor: pointer;background-color: gainsboro}             
+     .report{float: right;padding: 10px;color: gray;display: none;}   
+     .topicontent:hover .report{display: inline;cursor: pointer;}                                                               
+</style>
+<script>
+    $(function () {
+        $("#enjoy").click(function() {
+            var id = $(this).attr("data-topicid");
+            var ecount = parseInt($("#enjoycount a").html());
+            if ($("#Userid").val() == $("#TopicUserid").val()) {
+                $("#enjoy").attr("title", "自己不能喜欢自己");
+                return;
+            }
+            $.post("/Interactive/EnjoyTopic", { topicid: id }, function(data) {
+                if (data == 1) {//说明喜欢成功
+                    //这个时候要变颜色
+                    $("#enjoy i").css("color", "#ff00ff").attr("title", "已经喜欢");
+                    ecount++;
+                   $("#enjoycount a").html(ecount).show();
+                } else {
+                    ecount--;
+                    $("#enjoycount a").html(ecount);
+                    if (ecount == 0) {
+                        $("#enjoycount").hide();
+                    }
+                    $("#enjoy i").css("color", "#999").attr("title", "喜欢");
+                }
+            });
+        });
+
+        if ($("#Userid").val() == $("#TopicUserid").val()) {
+            $(".report").remove();
+        } 
+
+        $.post("/Interactive/IsEnjoyed", {}, function(data) {
+            var topic = $("#enjoy").attr("data-topicid");
+            for (var i = 0; i < data.length; i++) {
+                if (parseInt(topic) == data[i]) {
+                    $("#enjoy i").css("color", "#ff00ff").attr("title", "已经喜欢");
+                }
+            }
+        });
+    });
+</script>
+@Html.Action("TopicNav") 
+<div class="mianbody">
+    <div class="topleft">
+        <h3>@Model.Topic.Title</h3>
+        <div class="topic">
+            <div class="imgtopic"><a href="/User/Index?id=@Model.Topic.UserId"><img src="@Model.UninUser.User.ImgUrl"/></a><br/>
+                @Html.Raw(Model.UninUser.User.Age+"岁")<br/>
+                @Html.Raw(Model.UninUser.BaseInfo.ResidenceProvince+Model.UninUser.BaseInfo.ResidenceCity)
+            </div>
+            <div class="topicontent">
+                <div><span style="color: gray">来自：<a href="/User/Index?id=@Model.UninUser.User.UserId">@Model.Topic.UserName</a></span><span class="subtime">@Model.Topic.ActionTime</span></div>
+                <div class="content">
+                    @Html.Raw(Model.Topic.Content)
+                </div>
+                 <div class="reportdiv"></div>
+                <div class="topfoot">
+                    <span id="enjoy" data-topicid="@Model.Topic.Id"><i>&hearts;</i>喜欢</span>
+                    <span id="enjoycount"><a>@Model.Topic.LikeCount</a>人喜欢</span>
+                    <span class="report" data-reportType="topic" data-content="@Model.Topic.Content"
+                   data-relateId="@Model.Topic.Id" data-userId="@Model.Topic.UserId" data-userName="@Model.Topic.UserName" data-sextag="@ViewBag.Sex">
+                        拉黑/举报</span>
+                </div>
+            </div>
+        </div>
+         
+         @Html.Action("Coments","Interactive",new{topicId=Model.Topic.Id})
+    </div>
+    <div class="topright">
+        @Html.Action("InfoBlock")
+    </div>
+</div>
+<input type="hidden" id="TopicUserid" value="@ViewBag.UserId"/>
+<input type="hidden" id="Userid" value="@ViewBag.CurrentUserId"/>

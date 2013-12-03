@@ -1,0 +1,329 @@
+﻿@model Findlover.ViewModel.UserInfo
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="../../Content/CSS/userindex.css" rel="stylesheet" />
+<script src="../../Content/JS/userindex.js"></script>
+ <script type="text/javascript">
+     $(function () {
+         $("#mianNav>li").eq(4).addClass("active");
+         $.post("/Base/GetPraiseOrHelloList", { type: 0 }, function (data) {
+             $(".hi").each(function (n) {
+                 var id = $(this).attr("data-userid");
+                 for (var i = 0; i < data.length; i++) {
+                     if (parseInt(id) == data[i]) {
+                         $(".hi").eq(n).css("color", "#4169e1").css("background-color", "#fff0f5").attr("disabled", "disabled").attr("title", "已打招呼");
+                     }
+                 }
+             });
+         });
+         $.post("/Base/GetLikeList", {}, function (data) {
+             $(".like").each(function () {
+                 var id = $(this).attr("data-userid");
+                 for (var i = 0; i < data.length; i++) {
+                     if (parseInt(id) == data[i]) {
+                         $(this).html("已喜欢").css("background-color", "white").css("color", "#00ff7f").css("border", "1px gainsboro solid");
+                         $(this).attr("title", "取消喜欢");
+                     }
+                 }
+             });
+         });
+         
+         $.post("/User/CompareUser", { "userid": parseInt($("#oid").val()) }, function(data) {
+             $("#compare").append(data).show();
+         });
+         
+         var edit = $("#edittag").val();
+         switch (edit) {
+             case "1":
+                 //展示所有编辑框。
+                 $(".selecttitle span:eq(1),.selecttitle span:eq(2)").click();
+                 //滚动条下拉。
+                 $('html, body').animate({ scrollTop: $("body").height() }, 500);
+                 break;
+             case "2":
+                 $(".saytitle span").click();
+                 $('html, body').animate({ scrollTop: 100 }, 500);//再获取焦点
+                 $("#saywhat").focus();
+                 break;
+             case "3":
+                 $('html, body').animate({ scrollTop: 300 }, 500);
+                 $(".selecttitle span:eq(0)").click();
+                 $(".sbox:eq(0)").hide();                  
+         default:
+         }
+         if ($("#samesex").val() == "same") {
+             $(".btnholder").hide();
+             $("#compare").remove();
+         }
+
+         $("#triggerimgbox").click(function() {
+             var userid = $("#imgbox").attr("data-userid");
+             $.post("/User/ImageBox", { userid: userid }, function(data) {
+                 $("#imgbox").html(data);
+             });
+         });
+         $("#triggerstate").click(function () {
+             var userid = $("#statebox").attr("data-userid");
+             $.post("/User/StateList", { userid: userid }, function (data) {
+                 $("#statebox").html(data);
+             });
+         });
+
+
+     })
+ </script>
+
+<div style="margin-top:50px;" class="userbackground">
+    <div id="pin" class="pin" style="">
+        <div class="infopercentleft  "><span class="percent"></span><span id="pinfo">资料完整度:有待提高</span></div>
+        <div class="infopercentright">上传4张照片,资料完整度+8%  <a class="infotag" id="imgup"  href="#imgupload" data-toggle="modal" title="上传照片"><i class="icon-camera"></i></a> </div>
+    </div>
+    <div style="height: 50px;"></div>
+    <div class="infobox" >
+        <div class="imgbox">
+            <img alt="" src="@Model.ImgUrl"/>
+            <span id="modifyimg"><a href="/User/UpLoadPhoto"  style="text-decoration: none;"><i class="icon-user"></i>修改图像</a></span>
+        </div>
+        <div class="infowrap" >
+            <div class="uname "><i class="icon-user " style="vertical-align: baseline;"></i>@Model.UserName <span style="font-size: small;">@ViewData["Age"]岁</span></div>
+            <div class="mytable ">
+                <table class="">
+                    <tr>
+                        <td>身高:</td>
+                        <td><span id="sHeight">@Model.BaseInfo.Height</span></td>
+                        <td>学历:</td>
+                        <td><span id="sEducation">@Model.BaseInfo.Education</span></td>
+                    </tr>
+                    <tr>
+                        <td>月收入:</td>
+                        <td><span id="sMonthlyIncome">@Model.BaseInfo.MonthlyIncome</span></td>
+                        <td>毕业院校:</td>
+                        <td><span id="sSchool">@Model.BaseInfo.School</span></td>
+                    </tr>
+                    <tr>
+                        <td>工作单位:</td>
+                        <td><span id="sCompany">@Model.BaseInfo.Company</span></td>
+                        <td>居住地:</td>
+                        <td><span id="sResidenceCity">@Model.BaseInfo.ResidenceProvince @Model.BaseInfo.ResidenceCity</span></td>
+                    </tr>
+                    <tr>
+                        <td>目前职位:</td>
+                        <td><span id="sPosition">@Model.BaseInfo.Position</span></td>
+                        <td>行业:</td>
+                        <td><span id="sProfession">@Model.BaseInfo.Profession</span></td>
+                    </tr>
+                    <tr>
+                        <td>当前状态:</td>
+                        <td><span id="sState">@Model.BaseInfo.State</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="eidt"><i class="icon-pencil"></i>编辑</div>
+            <div class="btnholder">
+                <span class="like" data-userid="@Model.UserId"><i class="icon-heart icon-white"></i>喜欢</span>
+                <span class="chat" title="说两句">
+                     <a data-name="@Model.UserName" data-id="@Model.UserId" href="#msg_box"  data-msgType="0" data-stateType="0" data-relateId="0"  data-toggle="modal"><i class="icon-white icon-envelope"></i>私信</a>
+                </span>
+                <span class="likeinfo"></span>  
+                      @if (Model.Enable == 0)  {<span style="color: red">该用户已经被封禁,不能登陆</span> }
+                <span class="hi" data-userid="@Model.UserId" title="打招呼"><i class="icon-comment icon-white"></i>打招呼</span>
+                <span class="report" data-reportType="personal" data-relateId="@Model.UserId" data-content="@Model.UserName" data-userId="@Model.UserId" data-userName="@Model.UserName" data-sextag="@ViewBag.Sex">拉黑/举报</span>
+            </div>
+        </div>
+        <div class="infoedit hide" >
+            @using (Html.BeginForm("UpdateBaseInfo", "User", FormMethod.Post, new { name = "Form1", id = "Form1" }))
+            {
+                <table class="">
+                    <tr>
+                        <td>身高:</td>
+                        <td>
+                            <select name="Height" id="Height"></select></td>
+                        <td>学历:</td>
+                        <td>
+                            <select name="Education" id="Education"></select></td>
+                    </tr>
+                    <tr>
+                        <td>月收入:</td>
+                        <td>
+                            <select name="MonthlyIncome" id="MonthlyIncome"></select></td>
+                        <td>毕业院校:</td>
+                        <td>
+                            <input type="text" name="School" id="School" value="@Model.BaseInfo.School"/></td>
+                    </tr>
+                    <tr>
+                        <td>工作单位:</td>
+                        <td>
+                            <select name="Company" id="Company"></select></td>
+                        <td>居住地:</td>
+                        <td>
+                          <select name="ResidenceProvince" id="ResidenceProvince" style="width: 90px"></select>   <select name="ResidenceCity" id="ResidenceCity" style="width: 90px"></select></td>
+                    </tr>
+                    <tr>
+                        <td>目前职位:</td>
+                        <td>
+                            <select name="Position" id="Position"></select></td>
+                        <td>行业:</td>
+                        <td>
+                            <input type="text" id="Profession" readonly="readonly" name="Profession" value="生产/工艺/制造"></td>
+                    </tr>
+                    <tr>
+                        <td>当前状态:</td>
+                        <td>
+                            <select name="State" id="State"></select></td>
+                    </tr>
+                </table>
+              <button type="submit"  class="btn btn-info"> 保存</button> <span class="cancel-eidt">取消编辑</span>
+            }
+           
+        </div>
+         
+    </div>
+</div>
+<div class="bodybox">
+     <div class="container-fluid" style="margin:0;padding: 0;">
+     <div class="row-fluid " style="margin:0;padding: 0;">
+      <div class="span9">
+       <div class="dubai">
+           <div class="saytitle">内心独白 <span title="编辑"><i class="icon-pencil icon-white"></i></span><a href="javascript:;">取消编辑</a></div>
+           <div class="saying">@Model.LastState</div>
+           <div class="say">
+               <textarea id="saywhat"  style=" width: 100%;height: 70px; "></textarea>
+               <a class="btn btn-success ">提交</a><span >剩余<i>200</i>字</span><span id="textempty" style="display: none;color: red;font-size: small">别忘输入内容哦</span>
+           </div> 
+     </div>
+    <div class="comtabs">
+        <ul class="nav nav-tabs" id="myTab">
+            <li><a href="#trends" id="triggerstate" data-toggle="tab">我的动态</a></li>
+            <li><a href="#infos" class="active" data-toggle="tab">我的资料</a></li>
+            <li><a href="#qas" id="triggerimgbox" data-toggle="tab">我的相册</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane " id="trends">
+               <div id="statebox" data-userid="@Model.UserId"></div>
+            </div>
+            <div class="tab-pane active" id="infos">
+                <div class="selecttitle">择偶要求<span title="编辑"><i class="icon-pencil icon-white"></i></span><a href="javascript:;">取消编辑</a></div>
+                <div class="sbox" style="text-indent: 30px;">
+                    我希望你<span>生活在 <strong></strong><strong></strong>，</span>
+                        <span>年龄为 <strong></strong><strong id="ageul"> </strong>岁之间就好啦，</span>
+                        <span>身高在 <strong></strong><strong id="heighul">到 </strong>厘米之间 。</span>
+                        <span id="education_show" >学历是<strong> </strong>的话我们会有更多共同语言。</span>
+                        <span>月薪是<strong></strong><strong id="slary"></strong>元之间差不多，</span>
+                    以上并不是硬性要求，快来和我联系吧，也许你就是我生命里的那个人哦。
+                </div>
+                <div class="eidtbox">
+                     @using (Html.BeginForm("UpdateRequirement", "User", FormMethod.Post, new {name = "FormRequirement", id = "FormRequirement"}))
+                      {
+                          <ul>
+                              <li><span class="ulleft">身高：</span><span class="ulright"><select name="HightLl"id="HeightL" style="width: 90px"></select> 到 <select name="HightUl" id="HeightH"style="width: 90px"><option>不限</option></select></span></li>
+                              <li><span class="ulleft">年龄：</span><span class="ulright"><select name="AgeLl"id="AgeL" style="width: 90px"></select> 到 <select name="AgeUl" id="AgeH"style="width: 90px"><option>不限</option></select></span></li>
+                              <li><span class="ulleft">学历：</span><span class="ulright"><select name="Education" id="REducation" style="width: 200px"></select></span></li>
+                              <li><span class="ulleft">月收入：</span><span class="ulright"><select name="MonthlyIncomeLl" id="SalaryL"style="width: 90px"></select> 到 <select name="MonthlyIncomeUl"id="SalaryH" style="width: 90px"><option>不限</option></select></span></li>
+                              <li><span class="ulleft">居住地：</span><span class="ulright"><select name="ResidenceProvince" id="NowProvience" style="width: 90px"></select> --- <select name ="ResidenceCity" id="NowCity" style="width: 90px"><option>选择城市</option></select></span></li>
+                              <li><span class="ulleft"> </span><span class="ulright ">
+                              <input type="submit" style="margin-top: 5px" value="保存" class="btn btn-info"/>  </span></li>
+                          </ul>
+                      }
+                </div>
+
+                <div class="selecttitle">详细资料<span title="编辑"><i class="icon-pencil icon-white"></i></span><a href="javascript:;">取消编辑</a></div>
+                <div class="sbox">
+                    <ul>
+                        <li><span class="ulleft">住房情况：</span><span class="ulright">@Model.DetailInfo.Housing</span></li>
+                        <li><span class="ulleft">购车情况：</span><span class="ulright">@Model.DetailInfo.Car</span></li>
+                        <li><span class="ulleft">体重：</span><span class="ulright">@Model.DetailInfo.Weight</span></li>
+                        <li><span class="ulleft">民族：</span><span class="ulright">@Model.DetailInfo.People</span></li>
+                        <li><span class="ulleft">籍贯：</span><span class="ulright">@Model.DetailInfo.NativePlace @Model.DetailInfo.NativeCity </span></li>
+                        <li><span class="ulleft">星座：</span><span class="ulright">@Model.DetailInfo.Constellation</span></li>
+                        <li><span class="ulleft">血型：</span><span class="ulright">@Model.DetailInfo.BloodType</span></li>
+                        <li><span class="ulleft">微博地址：</span><span class="ulright">@Model.DetailInfo.MicroBlog</span></li>
+                        <li><span class="ulleft">豆瓣地址：</span><span class="ulright">@Model.DetailInfo.DouBan</span></li>
+                    </ul>
+
+                </div>
+                <div class="eidtbox">
+                    @using (Html.BeginForm("UpdateDetailInfo", "User", FormMethod.Post, new { name = "Form2", id = "Form2" }))
+                    {
+                        <ul>
+                            <li><span class="ulleft">住房情况：</span><span class="ulright"><select name="Housing" id="Housing"></select></span></li>
+                            <li><span class="ulleft">购车情况：</span><span class="ulright"><select name="Car" id="Car"></select></span></li>
+                            <li><span class="ulleft">体重：</span><span class="ulright"><input type="text" name="Weight" id="Weight" onkeyup="value=value.replace(/[^\d]/g,'')"  style="width: 160px"/>Kg</span></li>
+                            <li><span class="ulleft">民族：</span><span class="ulright"><select name="People" id="People"></select></span></li>
+                            <li><span class="ulleft">籍贯：</span><span class="ulright"><select id="Provience" name="NativePlace" style="width: 90px"></select><select name="NativeCity" id="City" style="width: 90px"></select></span></li>
+                            <li><span class="ulleft">星座：</span><span class="ulright"><select name="Constellation" id="Constellation"></select></span></li>
+                            <li><span class="ulleft">血型：</span><span class="ulright"><select name="BloodType" id="BloodType"></select></span></li>
+                            <li><span class="ulleft">微博地址：</span><span class="ulright"><input type="text" name="MicroBlog" id="MicroBlog"/></span></li>
+                            <li><span class="ulleft">豆瓣地址：</span><span class="ulright"><input type="text" name="DouBan" id="DouBan"/></span></li>
+                            <li><span class="ulleft"> </span><span class="ulright " ><input type="submit" style="margin-top: 5px" value="保存" class="btn btn-info"/></span></li>
+                        </ul>
+                       
+                    }
+                    <script>
+                    //var patrn = /^(http:\/\/|https:\/\/)/;
+                        //if (!patrn.exec('https://w3w.163.com')) {
+                        //    alert('false');
+                        //} else {
+                        //    alert('true');
+                        //}
+                        </script>
+                </div>
+
+                <div class="selecttitle">生活婚恋观<span title="编辑"><i class="icon-pencil icon-white"></i></span><a href="javascript:;">取消编辑</a></div>
+                <div class="sbox">
+                     <ul>
+                        <li><span class="ulleft longer ">工作时间安排：</span><span class="ulright ">@Model.LoveView.WorkTimePlan</span></li>
+                        <li><span class="ulleft longer">是否吸烟：</span><span class="ulright ">@Model.LoveView.Smoking</span></li>
+                        <li><span class="ulleft longer">是否喝酒：</span><span class="ulright ">@Model.LoveView.Drinking</span></li>
+                        <li><span class="ulleft longer">恋爱多久结婚：</span><span class="ulright ">@Model.LoveView.LoveDuration</span></li>
+                        <li><span class="ulleft longer">婚后是否要孩子：</span><span class="ulright ">@Model.LoveView.WantaBaby</span></li>
+                        <li><span class="ulleft longer">婚后是否介意与父母同住：</span><span class="ulright ">@Model.LoveView.ParentLiveTogether</span></li>
+                        <li><span class="ulleft longer">家庭中的家务应该由谁来承担：</span><span class="ulright ">@Model.LoveView.Housework</span></li>
+                        <li><span class="ulleft longer">婚后家庭理财方面，我更倾向于：</span><span class="ulright ">@Model.LoveView.ManageMoney</span></li>
+                        <li><span class="ulleft longer">厨艺如何？对对方的厨艺有无要求：</span><span class="ulright ">@Model.LoveView.Cooking</span></li>
+                        <li><span class="ulleft longer">是否接受异地恋：</span><span class="ulright">@Model.LoveView.Allopatry</span></li>
+                    </ul>
+                </div>
+                <div class="eidtbox">
+                      @using (Html.BeginForm("UpdateLoveView", "User", FormMethod.Post, new { name = "Form3", id = "Form3" }))
+                    {
+                        <ul>
+                            <li><span class="ulleft longer ">工作时间安排：</span><span class="ulright "><select name="WorkTimePlan" id="WorkTimePlan"></select></span></li>
+                            <li><span class="ulleft longer">是否吸烟：</span><span class="ulright "><select name="Smoking" id="Smoking"></select></span></li>
+                            <li><span class="ulleft longer">是否喝酒：</span><span class="ulright "><select  name="Drinking" id="Drinking" ></select></span></li>
+                            <li><span class="ulleft longer">恋爱多久结婚：</span><span class="ulright "><select name="LoveDuration" id="LoveDuration"></select></span></li>
+                            <li><span class="ulleft longer">婚后是否要孩子：</span><span class="ulright "><select id="WantaBaby" name="WantaBaby"></select></span></li>
+                            <li><span class="ulleft longer">婚后是否介意与父母同住：</span><span class="ulright "><select name="ParentLiveTogether" id="ParentLiveTogether"></select></span></li>
+                            <li><span class="ulleft longer">家庭中的家务应该由谁来承担：</span><span class="ulright "><select name="Housework" id="Housework"></select></span></li>
+                            <li><span class="ulleft longer">婚后家庭理财方面，我更倾向于：</span><span class="ulright "><select name="ManageMoney" id="ManageMoney"></select> </span></li>
+                            <li><span class="ulleft longer">厨艺如何？对对方的厨艺有无要求：</span><span class="ulright "><select name="Cooking" id="Cooking"></select>  </span></li>
+                            <li><span class="ulleft longer">是否接受异地恋：</span><span class="ulright"><select name="Allopatry" id="Allopatry"></select></span> </li>
+                            <li><span class="ulleft longer"> </span><span class="ulright " ><input type="submit" style="margin-top: 5px" value="保存" class="btn btn-info"/></span></li>
+                       </ul>
+                    }
+                </div>
+            
+            </div>
+            <div class="tab-pane" id="qas">
+                <div id="imgbox" data-userid="@Model.UserId"> </div>
+            </div>
+        </div>
+    </div>
+      </div>
+      
+         <div id="compare" class="party span3">
+           
+         </div>
+    
+  </div>
+</div>
+   
+    <div id="dataZoom" style="display: none">
+        <input type="hidden" id="whovisit" value="@ViewBag.User"/>    @* Self Visitor区别本人 和 访问者 *@
+        <input type="hidden" id="oid" value="@ViewBag.Oid"/> @* 产生对比视图 *@
+        <input type="hidden" id="edittag" value="@ViewBag.Edit"/> @* 是否是编辑状态 *@
+        <input type="hidden" id="samesex" value="@ViewBag.SameSex"/> @* 是否是编辑状态 *@
+    </div>
+ 
+</div>

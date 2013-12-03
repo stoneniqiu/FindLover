@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Findlover.ViewModel.SimpleUser>
+ @{
+     foreach (var user in Model)
+     {
+         <div class="imgbox">
+             <div class="imgwarp">
+             <a href="/User/Index?id=@user.UserId">
+                   <img src="@user.ImgUrl"/>
+             </a>
+           <br />
+             <span style="padding-left: 20px;"><a href="/User/Index?id=@user.UserId">@user.UserName </a></span><br />
+                 <span class="age">@user.Age 岁</span><span class="city">@user.City</span>
+             </div>
+<<<<<<< HEAD
+             <div class="btnholder"><span class="collect"><i class="icon-heart icon-white"></i>喜欢</span><span class="chat"><i class="icon-envelope icon-white"></i><a data-name="@user.UserName" data-id="@user.UserId" href="#msg_box" data-toggle="modal">私信</a></span></div>
+     </div>
+     }
+       
+     
+=======
+         <div class="btnholder"><span class="collect"><i class="icon-heart icon-white"></i>喜欢</span><span class="chat"><i class="icon-envelope icon-white"></i>私信</span></div>
+         </div>
+>>>>>>> cb70e9516fbcad447483d708f06cf59d9285e0c0
+     }
+     
+  }
+     <script>
+         $(function() {
+             $(".chat").each(function (n) {
+                 $(this).click(function () {
+                  var id = $(".chat a").eq(n).attr("data-id");
+                  var name = $(".chat a").eq(n).attr("data-name");
+                  $(".toname").html(name);
+                   $(".toid").html(id);
+                 });
+                 
+              });
+
+             $(".btn,.btn-primary").click(function () {
+                 var toid= $(".toid").html();
+                 var content = $(".msg_content").val();
+                 if (content == null) {
+                     return;
+                 }
+                 $.post("/Message/SendMessage", { toid: toid, content: content }, function(data) {
+                     //$("#msg_box").hide();
+                 });
+             });
+         })
+        
+     </script>
+<<<<<<< HEAD
+
+
+=======
+ 
+>>>>>>> cb70e9516fbcad447483d708f06cf59d9285e0c0

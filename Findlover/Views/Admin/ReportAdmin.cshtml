@@ -1,0 +1,237 @@
+﻿@model List<Findlover.Models.Report>
+
+@{
+    ViewBag.Title = "举报管理";
+    Layout = null;
+}
+<script src="../../Scripts/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="../../Scripts/jquery-1.8.3.js"></script>
+<link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+
+<!DOCTYPE html>
+<style>
+     .nowork{padding: 20px;text-align: center;font-family: Microsoft JhengHei;
+             color: #ffb6c1;font-size: 2em;background-color: #afeeee;border-radius: 5px;margin-top: 30px;} .notify{padding: 10px;color: red;margin-top: 10px;}
+     table {
+         font-size: small;
+     }
+    table .more {
+        min-height:80px;background-color: gainsboro;
+    }
+    .mybt{}
+    .toname {
+        color: #1e90ff;
+    }
+
+    .toid {
+        display: none;
+    }
+
+    .msg_content {
+        width: 500px;
+        height: 100px;
+        margin-top: 5px;
+    }
+
+    .message1 {
+        font-size: small;
+    }
+
+    .message1 span {
+        color: #999999;
+        margin-left: 10px;
+    }
+
+    .message1 span i {
+        color: black;
+        padding: 0 5px;
+    }
+
+    .message1 .error {
+        color: #ff1493;
+    }
+    .chat{}
+</style>
+<html>
+<head>
+    <title>ReportAdmin</title>
+    <script>
+        $(function() {
+            var bts = $("#retable .mybt");
+            bts.each(function (n) {
+                
+                //isdone=true的全部都要禁止！
+                var index = n + 1;
+                var isdone = $("#retable tr:eq("+index+") td:eq(5)").html();
+                if (isdone == "True") {
+                    $(this).attr("disabled", "disabled");
+                    $(this).attr("title", "已经处理");
+                }
+
+
+                $(this).click(function () {
+                    var tag = $(this).attr("data-isadd");//是否已经添的加触角
+                    var id = $(this).attr("data-id");
+                    var trp = $(this).parent().parent();//button 所在父级tr
+                    if (tag == "0") {
+                        $.post("/Admin/ReportUser", { "userId": id }, function(data) {
+                            var tr = "<tr><td colspan='7'><div class='more'>" + data + "</div></td></tr>";
+                            //调用分部视图。出入div中。
+                            trp.after(tr);
+                        });
+                        $(this).attr("data-isadd", "1");
+                    } else {
+                        trp.next().fadeToggle();
+                    }   
+                });
+            });
+            
+      
+            //统计独白的字数
+            var $tex = $(".message1 span:eq(0) i");
+            var $but = $(".msg_content");
+            var ie = jQuery.support.htmlSerialize;
+            var str = 0;
+            var abcnum = 0;
+            var maxNum = 800;
+            var texts = 0;
+            var total;
+            var enable = false;
+            if (ie) {
+                $but[0].oninput = changeNum;
+            } else {
+                $but[0].onpropertychange = changeNum;
+            }
+
+            function changeNum() {
+                //汉字的个数
+                str = ($but.val().replace(/\w/g, "")).length;
+                //非汉字的个数
+                abcnum = $but.val().length - str;
+                total = str * 2 + abcnum;
+                texts = Math.ceil((maxNum - (total)) / 2);
+                if (total > maxNum) {
+                    $tex.css("color", 'red');
+                    enable = false;
+                } else {
+                    $tex.css("color", 'black');
+                    enable = true;
+                }
+                if (str == 0) {
+                    enable = false; //控制能否提交的一个条件 就是限制字数
+                }
+                $tex.html(texts);
+            }
+
+            //弹出对话框
+            $(".modal-footer>.btn").click(function () {
+                var toid = $(".toid").html();
+                var content = $(".msg_content").val();
+                if ($.trim(content) == "") {
+                    mm("亲,你还没有输入哦");
+                    return;
+                }
+                if (enable&&toid!="") {
+                    $.post("/Message/SendMessage", { toid: toid, content: content,type:1 }, function (data) {
+                            $(".message1 .error").fadeIn(1000).css("color", '#008080').html("发送成功");
+                            var ss = setTimeout(function () {
+                                $(".message1 .error").fadeOut(1000, function () {
+                                    $('#msg_box').modal('hide');
+                                });
+                            }, 1000);
+                            $(".msg_content").val("");
+                            $tex.html(400);
+                    });
+                } else {
+                    mm("亲,一次一次慢慢说,字数不要太多");
+                }
+
+                function mm(txt) {
+                    $(".message1 .error").fadeIn(1000).html(txt);
+                    var st1 = setTimeout(function () {
+                        $(".message1 .error").fadeOut(1000);
+                    }, 2000);
+                }
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top  navbar-inverse ">
+        <div class="navbar-inner">
+            <div style="margin-left: 15%;">
+                <a class="brand" href="#">意中人管理平台</a>
+                <ul class="nav">
+                    <li class=""><a href="/Admin/Index">用户审核</a></li>
+                    <li class="active"><a href="/Admin/ReportAdmin">举报管理</a></li>
+                    <li><a href="#">添加QA</a></li>
+                    <li><a href="#">情感文苑</a></li>
+                    <li><a href="#">情感诊断</a></li>
+                    <li><a href="/Admin/SysAdmin">系统管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="row-fluid">
+            <div class="span2">
+                 <ul id="navlist" class="nav nav-list  ">
+                    <li><a href="/Admin/ReportAdmin">未处理的举报<i class="icon-chevron-right"></i></a> </li>
+                    <li><a href="/Admin/ReportAdmin?pageIndex=1">已处理的举报<i class="icon-chevron-right"></i></a> </li>
+                    <li><a href="/Admin/ReportAdmin?pageIndex=2">全部举报<i class="icon-chevron-right"></i></a> </li>
+                    <li class="divider"></li>
+                    <li><a href="/Admin/ForbidView">被封禁用户<i class="icon-chevron-right"></i></a> </li>
+                    <li class="divider"></li>
+                    <li><a href="/User/Index">返回主页 <i class="icon-chevron-right"></i></a></li>
+                </ul>  <div class="notify">
+                    同一个人举报超过三条以上建议消息警告
+                    超过8条以上，封号惩罚
+                </div>
+            </div>
+            <div class="span7">
+           
+                @{
+                    if (Model.Count() != 0)
+                    {
+                       
+                        <table class="table" id="retable">
+                            <tr><td>姓名</td><td>类型</td><td >描述</td><td>举报时间</td><td>举报人</td><td>是否处理</td><td>详情</td> </tr>
+               
+                            @foreach (var report in Model)
+                            {
+                                <tr><td ><a href="/User/Index?id=@report.ReportedUserId">@report.ReportedUserName</a></td><td>@report.ReportType.ToString()</td><td>@report.Description</td><td>@report.ActionTime</td><td><a href="/User/Index?id=@report.UserId">@report.UserName</a></td>
+                                    <td>@report.IsDone</td><td>
+                                                               <button   data-isadd="0" data-id="@report.ReportedUserId" class="btn btn-small btn-info mybt">详情</button>
+                                                           </td> 
+                                </tr>
+                            }
+                        </table> 
+                    }
+                    else
+                    {
+                        <div class="nowork">没有举报信息</div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    
+    <div id="msg_box" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>发送私信</h4>
+        </div>
+        <div class="modal-body">
+            <div>收件人：<span class="toname"></span><span class="toid"></span></div>
+            <textarea class="msg_content"></textarea>
+            <div class="message1"><span>剩余<i>400</i>字</span><span class="error"></span></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" aria-hidden="true">发送</button>
+        </div>
+    </div>
+</body>
+</html>

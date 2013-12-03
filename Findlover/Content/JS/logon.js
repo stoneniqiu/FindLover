@@ -1,0 +1,3 @@
+﻿$(function() {
+    $("html").addClass("backgroundimg");
+});

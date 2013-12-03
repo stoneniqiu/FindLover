@@ -1,0 +1,174 @@
+﻿@model Findlover.ViewModel.CompareUsers
+<style>
+    .comline{clear: both;min-height: 80px;height: auto;background-color: #fff0f5}
+    .ratediv{float: left;width: 10px;height: auto;display: inline;width:80px;width: auto;line-height: 70px; margin-left: 10px;}
+    .ratediv span{color: #00bfff;font-size: 2em;font-family: Gungsuh}
+     .imgcomp img{width: 50px;height:50px;position: absolute;}
+     #im2{top: 30px;left: 30px;}
+    .imgcomp{position: relative;width: 80px;min-height: 80px; float: left;}
+    .combox{padding: 10px;font-family:Microsoft JhengHei }
+    .divtitle{clear: both;display: block;padding: 10px 0;border-bottom: 1px solid gainsboro;}
+    .ditail{margin-top: 10px;} .ditail ul{margin: 0;cursor: default} .ditail ul li{ position: relative; border-top: 1px white solid;   border-bottom: 1px white solid;}
+     .ditail ul li>span{color: #4169e1}
+    .ditail ul li:hover {
+        border-top: 1px gainsboro solid;
+        border-bottom: 1px gainsboro solid;
+        background-color: #f0f8ff
+    }
+    .ditail ul li:hover>#info1 {
+        display: block;
+        top: 0;left: -244px; 
+    }
+     .ditail ul li:hover>#info2 {
+            display: block;
+        top: 0;left: -305px;
+     }
+       .ditail ul li:hover>#info3 {
+           display: block;
+        top: 0;left: -305px;
+     }
+         .ditail ul li:hover>#info4 {
+           display: block;
+        top: -70px;left: -192px;
+     }
+    .hideinfo>div>span{color: #ff1493}
+    .hideinfo{display: none;position: absolute;padding: 15px;width: auto;box-shadow: 0 0 10px gray;background-color: #f0f8ff; }
+    .hideinfo .infot{font-weight: bold;margin-bottom: 5px;}  
+    .hideinfo table td{text-align: center;}
+</style>
+
+<div class="combox">
+    <div class="comline">
+        <div class="imgcomp">
+            <a href="/User/Index?id=@Model.Ta.User.UserId">  <img id="im1" src="@Model.Ta.User.ImgUrl"/></a>
+            <a href="/User/Index?id=@Model.Wo.User.UserId"> <img  id="im2" src="@Model.Wo.User.ImgUrl"/></a>
+        </div>
+        
+        <span class="ratediv">推荐度:<span>@Math.Round(Model.Rate.TotalRate * 100)%</span></span>
+    </div>
+    <div class="divtitle">推荐度由以下指标综合得出</div>
+    <div class="ditail">
+        <ul>
+            <li>用户热度 
+                <span> @Math.Round(Model.Rate.UserHotRate*100)%</span>
+                <div class="hideinfo" id="info1">
+                    <div class="infot">用户热度</div>
+                    <div>@Html.Raw(ViewBag.Sex+"的人气超过了<span>"+ Math.Round(Model.Rate.UserHotRate * 100)+"%</span>")的意中人用户</div>
+                </div>
+
+            </li>
+            <li>@Html.Raw(ViewBag.Sex+"是否符合我的要求")<span> @Math.Round(Model.Rate.ForMeRate*100)%</span>
+                <div class="hideinfo" id="info2">
+                    <div class="infot">@Html.Raw(ViewBag.Sex+"是否符合我的要求")<span> @Model.WoInts.Sum()/5</span></div>
+                    <div>
+                        <table id="formetable">
+                            <tr><td></td><td>@Html.Raw(ViewBag.Sex+"的资料")</td><td>我的择偶要求</td><td>是否匹配</td></tr>
+                            <tr><td>年龄</td><td>@Model.Ta.User.Age 岁</td><td>@Model.MyRequirement.AgeLl-@Model.MyRequirement.AgeUl 岁</td><td>@Model.WoInts[0]</td></tr>
+                            <tr><td>地区</td><td>@Model.Ta.BaseInfo.ResidenceProvince@Model.MyRequirement.ResidenceCity</td><td>@Model.MyRequirement.ResidenceProvince@Model.MyRequirement.ResidenceCity</td><td>@Model.WoInts[1]</td></tr>
+                            <tr><td>身高</td><td>@Model.Ta.BaseInfo.Height</td><td>@Model.MyRequirement.HightLl-@Model.MyRequirement.HightUl</td><td>@Model.WoInts[2]</td></tr>
+                            <tr><td>学历</td><td>@Model.Ta.BaseInfo.Education</td><td>@Model.MyRequirement.Education</td><td>@Model.WoInts[3]</td></tr>
+                            <tr><td>月收入</td><td>@Model.Ta.BaseInfo.MonthlyIncome</td><td>@Model.MyRequirement.MonthlyIncomeLl-@Model.MyRequirement.MonthlyIncomeUl</td><td>@Model.WoInts[4]</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </li>   
+            <li>@Html.Raw("我是否符合"+ViewBag.Sex+"的要求")<span> @Math.Round(Model.Rate.ForOtherRate*100)%</span>
+                <div class="hideinfo" id="info3">
+                    <div class="infot">@Html.Raw(ViewBag.Sex+"是否符合我的要求")<span> @Model.TaInts.Sum()/5</span></div>
+                    <div>
+                        <table id="futable">
+                            <tr><td></td><td>我的资料</td><td>@Html.Raw(ViewBag.Sex+"的择偶要求")</td><td>是否匹配</td></tr>
+                            <tr><td>年龄</td><td>@Model.Wo.User.Age 岁</td><td>@Model.OtherRequirement.AgeLl-@Model.OtherRequirement.AgeUl 岁</td><td>@Model.TaInts[0]</td></tr>
+                            <tr><td>地区</td><td>@Model.Wo.BaseInfo.ResidenceProvince@Model.OtherRequirement.ResidenceCity</td><td>@Model.OtherRequirement.ResidenceProvince@Model.MyRequirement.ResidenceCity</td><td>@Model.TaInts[1]</td></tr>
+                            <tr><td>身高</td><td>@Model.Wo.BaseInfo.Height</td><td>@Model.OtherRequirement.HightLl-@Model.OtherRequirement.HightUl</td><td>@Model.TaInts[2]</td></tr>
+                            <tr><td>学历</td><td>@Model.Wo.BaseInfo.Education</td><td>@Model.OtherRequirement.Education</td><td>@Model.TaInts[3]</td></tr>
+                            <tr><td>月收入</td><td>@Model.Wo.BaseInfo.MonthlyIncome</td><td>@Model.OtherRequirement.MonthlyIncomeLl-@Model.OtherRequirement.MonthlyIncomeUl</td><td>@Model.TaInts[4]</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            <li>生活婚恋观契合度<span> @Math.Round(Model.Rate.LoveViwRate*100)%</span>
+                <div class="hideinfo" id="info4">
+                    <div class="infot">生活婚恋观契合度<span> @Model.LoveInts.Sum()/10</span></div>
+                    <div>
+                        <table id="ltable">
+                            <tr><td>婚恋观</td><td>是否匹配</td></tr>
+                            <tr><td>工作时间安排</td><td>@Model.LoveInts[0]</td></tr>
+                            <tr><td>是否吸烟要求</td><td>@Model.LoveInts[1]</td></tr>
+                            <tr><td>是否喝酒要求</td><td>@Model.LoveInts[2]</td></tr>
+                            <tr><td>恋爱多久结婚</td><td>@Model.LoveInts[3]</td></tr>
+                            <tr><td>是否要孩子</td><td>@Model.LoveInts[4]</td></tr>
+                            <tr><td>父母同住要求</td><td>@Model.LoveInts[5]</td></tr>
+                            <tr><td>家务要求</td><td>@Model.LoveInts[6]</td></tr>
+                            <tr><td>家庭理财</td><td>@Model.LoveInts[7]</td></tr>
+                            <tr><td>厨艺如何</td><td>@Model.LoveInts[8]</td></tr>
+                            <tr><td>是否接受异地恋</td><td>@Model.LoveInts[9]</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <script>
+            $(function () {
+                var trs = $("#formetable tr");
+                var age = trs.eq(1).find("td:eq(2)");
+                var agestr = age.html();
+                if (agestr.indexOf("-0")) {
+                    age.html(agestr.split('-')[0] + "岁以上");
+                };
+                
+                var hight = trs.eq(3).find("td:eq(2)");
+                var hightstr = hight.html();
+                if (hightstr.indexOf("-0")) {
+                    hight.html(hightstr.split('-')[0] + "厘米以上");
+                };
+                
+                var income = trs.eq(5).find("td:eq(2)");
+                var incomestr = income.html();
+                if (incomestr.indexOf("-0")) {
+                    income.html(incomestr.split('-')[0] + "元以上");
+                };
+                
+                
+                var trs1 = $("#futable tr");
+                var age1 = trs1.eq(1).find("td:eq(2)");
+                var agestr1 = age1.html();
+                if (agestr1.indexOf("-0")) {
+                    age1.html(agestr1.split('-')[0] + "岁以上");
+                };
+
+                var hight1 = trs1.eq(3).find("td:eq(2)");
+                var hightstr1 = hight1.html();
+                if (hightstr1.indexOf("-0")) {
+                    hight1.html(hightstr1.split('-')[0] + "厘米以上");
+                };
+
+                var income1 = trs1.eq(5).find("td:eq(2)");
+                var incomestr1 = income1.html();
+                if (incomestr1.indexOf("-0")) {
+                    income1.html(incomestr1.split('-')[0] + "元以上");
+                };
+                
+
+                $("#formetable tr,#futable tr").each(function (n) {
+                    if ($(this).find("td:eq(2)").html() == "" || $(this).find("td:eq(2)").html()[0] == "0") {
+                        $(this).find("td:eq(2)").html("不限");
+                    }
+                    if ($(this).find("td:eq(3)").html() == "1") {
+                        $(this).find("td:eq(3)").html("<i class='icon-ok'></i>");
+                    } if ($(this).find("td:eq(3)").html() == "0") {
+                        $(this).find("td:eq(3)").html("<i class='icon-remove'></i>");
+                    }
+                });
+                
+                $("#ltable tr").each(function (n) {
+                    if ($(this).find("td:eq(1)").html() == "1") {
+                        $(this).find("td:eq(1)").html("<i class='icon-ok'></i>");
+                    } if ($(this).find("td:eq(1)").html() == "0") {
+                        $(this).find("td:eq(1)").html("<i class='icon-remove'></i>");
+                    }
+                });
+            });
+        </script>
+    </div>
+</div>

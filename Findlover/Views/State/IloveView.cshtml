@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Findlover.ViewModel.LoverState>
+
+ <style>
+    .totoal span{color: #00bfff;font-size: 2em;font-family: 楷体}
+    .totoal{margin: 10px 0 10px 0; font-size: medium;text-indent: 10px;}
+    .hold{background-color: white;padding: 25px;margin-top: 20px;box-shadow: 0 0 10px gray;height: auto;}
+    .vline{clear: both;min-height: 100px; overflow: auto;height: auto ;padding: 20px 10px; border-bottom: 1px gainsboro solid;}
+    .vline:hover{background-color: #f0ffff;}
+    .imgleft{width: 100px;height: 100px;float: left}
+    .imgleft img{width: 90px;height: 90px;}
+    .message{float: left;padding: 10px;width: 80%} .message span{color: gray}
+   .message div{color: gray;font-size: small}  .message div img{ max-height: 120px;max-width: 120px;display: inline;margin-right: 5px;vertical-align: top;cursor: pointer}
+    .messagefoot .chat a{ color: #dcdcdc  }  .message:hover .chat a{color: #00bfff}
+    .messagefoot .chat{ float: right; cursor: pointer;}
+</style>
+<div class="hold">
+    @{
+        var str = "";
+        str = Model.Count() >= 2 ? ",不要太花心哦" : ",锁定目标,奋起直追！";
+     } 
+    <div class="totoal">@Html.Raw("共喜欢了"+Model.Count()+"个<span>"+ViewBag.Sex+"</span>"+str)</div>
+    @{
+        foreach (var visitUser in Model)
+        {
+            <div class="vline">
+                <div class="imgleft">
+                    <a href="/User/Index?id=@visitUser.Lover.User.UserId"><img  src="@visitUser.Lover.User.ImgUrl"/></a> 
+                </div>
+                <div class="message">
+                    <a href="/User/Index?id=@visitUser.Lover.User.UserId">@visitUser.Lover.User.UserName</a> <br/>
+                    <div data-userid="@visitUser.LastState.UserId">@Html.Raw(visitUser.LastState.Content)</div>
+                    <div class="messagefoot"><span><i class="icon-time"></i> @visitUser.ActionTime</span>
+                        <span class="chat"> <a data-name="@visitUser.Lover.User.UserName"  data-msgType="0" data-stateType="0" data-relateId="0"  data-id="@visitUser.Lover.User.UserId" href="#msg_box" data-toggle="modal">  发私信</a></span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

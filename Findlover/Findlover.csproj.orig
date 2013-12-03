@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4B9F21CE-D415-4A5A-A710-62F9F249006D}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Findlover</RootNamespace>
+    <AssemblyName>Findlover</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\..\..\..\Program Files (x86)\Telerik\Kendo UI for ASP.NET MVC Q2 2012\wrappers\aspnetmvc\Binaries\Mvc3\Kendo.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.1.2\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.1.0.20105.408\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Helper.cs" />
+    <Compile Include="Helper\ObjectCopier.cs" />
+    <Compile Include="Helper\SendMail.cs" />
+    <Compile Include="Helper\ValidateCode.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BaseInfo.cs" />
+    <Compile Include="Models\Hello.cs" />
+    <Compile Include="Models\Iamgbox.cs" />
+    <Compile Include="Models\Inform.cs" />
+    <Compile Include="Models\InfoStatistic.cs" />
+    <Compile Include="Models\LastState.cs" />
+    <Compile Include="Models\LoginLog.cs" />
+    <Compile Include="Models\LoveDb.cs" />
+    <Compile Include="Models\LoveDbRepository.cs" />
+    <Compile Include="Models\MegType.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Praise.cs" />
+    <Compile Include="Models\Requirement.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Search.cs" />
+    <Compile Include="Models\State.cs" />
+    <Compile Include="Models\StateType.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\VisitLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\SimpleUser.cs" />
+    <Compile Include="ViewModel\UninUser.cs" />
+    <Compile Include="ViewModel\UserInfo.cs" />
+    <Compile Include="ViewModel\UserStateView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\backgroundimg\bf.jpg" />
+    <Content Include="Content\backgroundimg\bg.jpg" />
+    <Content Include="Content\backgroundimg\bk1.jpg" />
+    <Content Include="Content\backgroundimg\b5.jpg" />
+    <Content Include="Content\backgroundimg\b1.jpg" />
+    <Content Include="Content\backgroundimg\b2.jpg" />
+    <Content Include="Content\backgroundimg\b3.jpg" />
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\CSS\adminindex.css" />
+    <Content Include="Content\CSS\base.css" />
+    <Content Include="Content\CSS\Logon.css" />
+    <Content Include="Content\CSS\Message.css" />
+    <Content Include="Content\CSS\search.css" />
+    <Content Include="Content\CSS\stateview.css" />
+    <Content Include="Content\CSS\userindex.css" />
+    <Content Include="Content\JS\Adminindex.js" />
+    <Content Include="Content\JS\form.js" />
+    <Content Include="Content\JS\jquery.jqzoom.js" />
+    <Content Include="Content\JS\logon.js" />
+    <Content Include="Content\JS\Pin.js" />
+    <Content Include="Content\JS\search.js" />
+    <Content Include="Content\JS\userindex.js" />
+    <Content Include="Content\kendo\2012.2.710\Black\editor.png" />
+    <Content Include="Content\kendo\2012.2.710\Black\imagebrowser.png" />
+    <Content Include="Content\kendo\2012.2.710\Black\loading-image.gif" />
+    <Content Include="Content\kendo\2012.2.710\Black\loading.gif" />
+    <Content Include="Content\kendo\2012.2.710\Black\slider-h.gif" />
+    <Content Include="Content\kendo\2012.2.710\Black\slider-v.gif" />
+    <Content Include="Content\kendo\2012.2.710\Black\sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\editor.png" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\imagebrowser.png" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\loading-image.gif" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\loading.gif" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\slider-h.gif" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\slider-v.gif" />
+    <Content Include="Content\kendo\2012.2.710\BlueOpal\sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\Default\editor.png" />
+    <Content Include="Content\kendo\2012.2.710\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\2012.2.710\Default\loading-image.gif" />
+    <Content Include="Content\kendo\2012.2.710\Default\loading.gif" />
+    <Content Include="Content\kendo\2012.2.710\Default\slider-h.gif" />
+    <Content Include="Content\kendo\2012.2.710\Default\slider-v.gif" />
+    <Content Include="Content\kendo\2012.2.710\Default\sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\images\android-sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\images\iconmasks.svg" />
+    <Content Include="Content\kendo\2012.2.710\images\icons.png" />
+    <Content Include="Content\kendo\2012.2.710\images\ios-sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\kendo.black.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.blueopal.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.common.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.dataviz.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.default.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.metro.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.mobile.all.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.mobile.android4.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.mobile.blackberry.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.mobile.ios.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.mobile.meego.min.css" />
+    <Content Include="Content\kendo\2012.2.710\kendo.silver.min.css" />
+    <Content Include="Content\kendo\2012.2.710\Metro\editor.png" />
+    <Content Include="Content\kendo\2012.2.710\Metro\imagebrowser.png" />
+    <Content Include="Content\kendo\2012.2.710\Metro\loading-image.gif" />
+    <Content Include="Content\kendo\2012.2.710\Metro\loading.gif" />
+    <Content Include="Content\kendo\2012.2.710\Metro\slider-h.gif" />
+    <Content Include="Content\kendo\2012.2.710\Metro\slider-v.gif" />
+    <Content Include="Content\kendo\2012.2.710\Metro\sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\Silver\editor.png" />
+    <Content Include="Content\kendo\2012.2.710\Silver\imagebrowser.png" />
+    <Content Include="Content\kendo\2012.2.710\Silver\loading-image.gif" />
+    <Content Include="Content\kendo\2012.2.710\Silver\loading.gif" />
+    <Content Include="Content\kendo\2012.2.710\Silver\slider-h.gif" />
+    <Content Include="Content\kendo\2012.2.710\Silver\slider-v.gif" />
+    <Content Include="Content\kendo\2012.2.710\Silver\sprite.png" />
+    <Content Include="Content\kendo\2012.2.710\textures\glass.png" />
+    <Content Include="Content\kendo\2012.2.710\textures\highlight.png" />
+    <Content Include="Content\Photos\12684593517538.jpg" />
+    <Content Include="Content\Photos\ali.png" />
+    <Content Include="Content\Photos\ali1.png" />
+    <Content Include="Content\Photos\bkg1.jpg" />
+    <Content Include="Content\Photos\bkg1s.jpg" />
+    <Content Include="Content\Photos\digg.jpg" />
+    <Content Include="Content\Photos\ducati_sf.jpg" />
+    <Content Include="Content\Photos\ducati_sf_small.jpg" />
+    <Content Include="Content\Photos\heed.jpg" />
+    <Content Include="Content\Photos\luren.jpg" />
+    <Content Include="Content\Photos\visitor.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\ui-lightness\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Content\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\themes\Site.css" />
+    <Content Include="Content\Font\xjlFont.fon" />
+    <Content Include="Content\Font\AaronHand.ttf" />
+    <Content Include="NLog.config" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\jquery.min.js" />
+    <None Include="Scripts\kendo\2012.2.710\kendo.all-vsdoc.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.all.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.autocomplete.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.binder.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.calendar.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.columnmenu.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.combobox.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.core.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.data.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.data.odata.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.data.xml.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.chart.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.core.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.gauge.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.svg.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.themes.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dataviz.vml.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.datepicker.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.datetimepicker.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.draganddrop.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.dropdownlist.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.editable.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.editor.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.filtermenu.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.fx.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.grid.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.groupable.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.history.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.list.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.listview.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.menu.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.actionsheet.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.application.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.button.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.buttongroup.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.listview.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.loader.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.modalview.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.navbar.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.pane.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.popover.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.scroller.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.scrollview.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.shim.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.splitview.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.swipe.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.switch.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.tabstrip.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.mobile.view.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.numerictextbox.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.pager.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.panelbar.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.popup.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.reorderable.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.resizable.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.selectable.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.slider.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.sortable.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.splitter.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.tabstrip.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.timepicker.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.treeview.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.upload.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.validator.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.web.min.js" />
+    <Content Include="Scripts\kendo\2012.2.710\kendo.window.min.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Views\User\Scripts\kendo.modernizr.custom.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\User\Logon.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\SorryView.cshtml" />
+    <Content Include="Views\Admin\SysAdmin.cshtml" />
+    <Content Include="Views\User\UpLoadPhoto.cshtml" />
+    <Content Include="Views\User\Search.cshtml" />
+    <Content Include="Views\User\UserPage.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\State\Index.cshtml" />
+    <Content Include="Views\State\UserState.cshtml" />
+=======
+    <Content Include="Views\Message\CheckPrivateMessage.cshtml" />
+    <Content Include="Views\Message\CheckMessageRecords.cshtml" />
+>>>>>>> dd8b5ee91ae8bc2b64305ac119c1dae399824d57
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\TempFile\" />
+    <Folder Include="Content\UploadFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>14114</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63267/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties UseCdnSupport="False" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

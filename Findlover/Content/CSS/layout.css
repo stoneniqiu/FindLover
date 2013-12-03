@@ -1,0 +1,226 @@
+﻿  
+.msgTag {
+    background-color: #ff1493;width: 15px;text-align: center;height:5px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;position: absolute;top: 8px;right: 14px;font-size: xx-small;color: white;line-height: 8px;display: none
+}
+
+#subul .msgTag1 {
+    background-color: #ff00ff;width: 15px;height:15px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;position: absolute;top: 8px;right: 14px;font-size: xx-small;color: white; 
+    text-align: center;display: none
+}
+
+#adminli,#loginli{display: none
+}
+.navbarmodify {
+    -ms-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    fill-opacity: 0.8;
+            line-height: 25px; /*box-shadow: 0 1px 10px gray;*/
+}
+
+.navbar-inner ul {
+            font-size: large;
+        }
+
+        ul li a span {
+            display: block;
+            padding: 6px 0;
+        }
+
+        li ul {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+        }
+
+        li {
+            position: relative;
+            list-style-type: none;
+        }
+
+        .nav ul {
+            display: none;
+            margin: 0;
+            padding: 0;
+            width: 185px;
+            position: absolute;
+            top: 45px;
+            left: 10px;
+            padding: 10px;
+            background: white;
+            border: solid 1px #b4b4b4;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-shadow: 0 1px 8px rgba(0,0,0, .3);
+            -moz-box-shadow: 0 1px 8px rgba(0,0,0, .3);
+            -ms-box-shadow: 0 1px 8px rgba(0,0,0, .3);
+            box-shadow: 0 1px 8px rgba(0,0,0, .3);
+            cursor: pointer;
+        }
+
+.nav ul li {
+                padding: 5px 0;
+                font-size: small;
+            }
+
+                .nav ul li:hover {
+                    text-decoration: underline;
+                }
+
+        .nav li:hover > ul {
+            display: block;
+        }
+
+        .toname {
+            color: #1e90ff;
+        }
+
+        .toid {
+            display: none;
+        }
+
+        .msg_content {
+            width: 500px;
+            height: 100px;
+            margin-top: 5px;
+        }
+
+        .message1 {
+            font-size: small;
+        }
+
+            .message1 span {
+                color: #999999;
+                margin-left: 10px;
+            }
+
+                .message1 span i {
+                    color: black;
+                    padding: 0 5px;
+                }
+
+            .message1 .error {
+                color: #ff1493;
+            }
+
+        #reportedname {
+            color: red;
+        }
+
+        .reportinfo {
+            color: gray;
+            margin-top: 5px;
+        }
+
+        .divline {
+            border-bottom: 1px gainsboro dashed;
+            margin-top: 5px;
+        }
+
+        #reportName {
+            color: red;
+        }
+
+        .reportbox {
+            padding: 5px;
+        }
+
+        .divrow ul {
+            margin: 0;
+            color: gray;
+            font-size: small;
+        }
+
+            .divrow ul li label {
+                display: inline;
+                margin-right: 10px;
+                margin-left: 5px;
+            }
+
+        .divrow #IsReport {
+            vertical-align: baseline;
+            margin-right: 5px;
+        }
+
+        #reportdes {
+            width: 500px;
+            margin-top: 10px;
+            -ms-border-radius: 0;
+            border-radius: 0;
+            height: 30px;
+        }
+
+        #reportcontent {
+            padding: 5px;
+            background-color: #eee;
+            font-size: x-small;
+            margin-bottom: 5px;
+            color: gray;
+        }
+
+        .reportmessage {
+            float: left;
+            color: red;
+        }
+
+        .uploadbox {
+            float: left;width: 115px;height: 115px;
+            background-color: #eeeeee;
+            margin-right: 10px;color: white;text-align: center;cursor: pointer;
+            position: relative;display: none;
+        }
+        .uploadbox:hover {
+              background-color: #b4b4b4;
+        }
+       .stt{ font-size: xx-small;display: block;}
+       .add{  vertical-align: baseline;display: block;height: auto;font-size: 8em; height: 40px;padding: 10px;margin-top: 30px}
+      .imgcontainer{ width: 100%;height: 100%}  .imgcontainer img{ max-height: 115px;max-width: 115px;}
+        .inputdiv{ clear: both;display: block;padding-top: 10px;}
+        #Remark{ width:478px;}
+       .infospan {
+           display: none; height: 20px;position: absolute;bottom: 0;right: 0;width: 100%;background-color: #00bfff;z-index: 1;clear: both;
+           -ms-opacity: 0.8;
+           opacity: 0.8;
+       }
+
+.closespan {
+    display: none; position: absolute;right: -7px;top: -7px;width: 14px;height: 14px;
+    -ms-border-radius: 7px;
+    border-radius: 7px;background-color: white;border: 1px gainsboro solid;color: gray;
+           font-weight: bold;font-size: medium;
+           line-height: 16px;
+}
+
+.closespan:hover{ color: red;}
+       #imgupload form{ display: none;}       
+       .imguploadmessage{ font-size: small;color: green;float: left;margin-left: 10px;}
+       .carclose {
+           cursor: pointer;  
+           background-color: white;
+           position: absolute;z-index: 99;top:0;right: -40px;
+           width: 40px;height:40px;
+           -ms-border-radius: 20px;
+           border-radius: 20px;text-align: center;
+           line-height: 40px;font-size: 2em;color: gray;
+       }
+
+.carclose:hover{ color: green;background-color: #eeeeee}
+     #CarouselBox #myCarousel .carousel-inner img {
+          max-height: 100%;
+          max-width: 100%;
+      }
+       #CarouselBox {
+            height: 60%;
+           width: 50%;
+       } 
+        #CarouselBox #myCarousel .carousel-inner, #CarouselBox #myCarousel {
+                height:100%;
+           width: 100%;
+          }

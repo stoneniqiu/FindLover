@@ -1,0 +1,108 @@
+﻿ 
+.backgroundimg {
+    background: url(../../Content/backgroundimg/bk1.jpg) repeat;
+    -ms-background-size: cover;
+    background-size: cover;
+}
+
+.title{ width: 100%;text-align: center;}
+.bt {
+    font-size: 6em;color: #00bfff;font-family: 楷体;
+    -ms-text-shadow: 3px 3px  gray;
+    text-shadow: 3px 3px  gray;
+}
+
+.st{ font-size: 1.5em;color: #00ced1;font-family: Microsoft JhengHei}
+.loginbox {
+    margin: 0 auto;
+    -moz-min-width: 300px;
+    -ms-min-width: 300px;
+    -o-min-width: 300px;
+    -webkit-min-width: 300px;
+    min-width: 300px;min-height: 300px;width: 450px;height:300px;
+    -ms-opacity: 0.8;
+    opacity: 0.8;border: 1px solid darkgray;background-color: #dcdcdc;
+    margin-top: 20px;padding: 10px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 10px gray;
+    -ms-box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 10px gray;
+}
+
+.loginbox ul li {
+    list-style-type: none;text-align: left;width: 360px;margin-top: 15px;margin-bottom: 15px;
+}
+.loginbox ul li a {
+    text-decoration: none;color: #666;vertical-align: bottom;
+}
+.loginbox ul li a:hover {
+    color: #222;text-decoration: underline;
+}
+.loginbox ul{ margin-top: 0px;  }
+.loginbox input[type='text'],.loginbox input[type='password'] {
+    width: 360px;height: 40px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;background-color: white;color: black;
+    font-size: medium;text-indent: 10px;
+}
+
+.loginbox input[type='text']:focus,.loginbox input[type='password']:focus {
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+}
+
+input[type='checkbox']{ width: 20px;height: 20px;color: #0099FF}
+label{ font-size: medium;font-family: Microsoft JhengHei; }
+body{ text-align: center;}
+
+.button {
+    width: 200px;cursor: pointer;height: 40px;font-size: 1.2em;
+   border-top: 1px solid #d96fd0;
+   background: #d156c3;
+   background: -webkit-gradient(linear, left top, left bottom, from(#813e9c), to(#d156c3));
+   background: -webkit-linear-gradient(top, #813e9c, #d156c3);
+   background: -moz-linear-gradient(top, #813e9c, #d156c3);
+   background: -ms-linear-gradient(top, #813e9c, #d156c3);
+   background: -o-linear-gradient(top, #813e9c, #d156c3);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -ms-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -ms-text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+}
+
+.button:hover {
+   border-top-color: #c93ac2;
+   background: #c93ac2;
+   color: #ccc;
+   }
+ .button:active {
+   border-top-color: #a436a8;
+   background: #a436a8;
+   }
+ .text-error {
+     font-size: small; width: 100px; padding: 5px 15px;display: none;
+               -webkit-border-top-left-radius: 8px;-webkit-border-top-right-radius: 8px;
+   -moz-border-top-left-radius: 8px; -moz-border-top-right-radius: 8px;
+     -ms-border-top-left-radius: 8px;
+     border-top-left-radius: 8px;
+     -ms-border-top-right-radius: 8px;
+     border-top-right-radius: 8px;
+     font-family: Microsoft JhengHei, 华文宋体, Arial;letter-spacing: 3px;
+     background-color: #d156c3;color: white;
+     -webkit-box-shadow: 0 0 5px gray;
+     -ms-box-shadow: 0 0 5px gray;
+     box-shadow: 0 0 5px gray;
+ }

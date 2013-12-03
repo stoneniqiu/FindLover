@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Findlover.Models.Topic>
+
+@{
+    ViewBag.Title = "意中人 我的话题";
+}
+<link href="../../Content/CSS/topicnav.css" rel="stylesheet" />
+<style>
+    #mytable tr td{font-size: small;}  #mytable tr td a{cursor: pointer;}
+   .delete{}
+
+</style>
+@Html.Action("TopicNav")
+<script>
+    $(function() {
+        $(".delete").click(function(e) {
+            e.preventDefault();
+            var tr = $(this).parent().parent();
+            var isss = confirm("删除之后不可恢复,确定要删除吗?");
+            if (isss) {
+                var id = $(this).attr("data-id");
+                $.post("/Interactive/DeleteTopic", { id: id }, function () {
+                    tr.fadeOut();
+                });
+            }
+        });
+
+        var type = $("#typeid").val();
+        if (type == 1 || type == 2) {
+            $("#mytable tr").each(function() {
+                $(this).find("td:eq(5)").hide();
+            });
+        }
+
+    });
+</script>
+<div class="mianbody">
+     <div class="topleft">
+        @if (Model.Count() != 0)
+        {
+        <table class="table" id="mytable">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Title, "Detail", new { topicId = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReplyCount)回应
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LikeCount)喜欢
+                    </td>
+                    <td>
+                        最后更新 @Html.DisplayFor(modelItem => item.UpDataTime)
+                    </td>
+                    <td>
+                        @item.ActionTime.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.ActionLink("修改", "Edit", new { id = item.Id }) | <a class="delete" data-id="@item.Id">删除</a>
+                    </td>
+                </tr>
+            }
+     
+        </table>
+        }
+        else
+        {
+        <div class="emptyinfo">目前暂无记录</div>
+        }
+
+    </div>
+    <div class="topright">
+        @Html.Action("InfoBlock")
+    </div>
+</div>
+ <input type="hidden" id="typeid" value="@ViewBag.TypeId"/>
+

@@ -1,0 +1,183 @@
+﻿@model IEnumerable<Findlover.ViewModel.UninComments>
+
+<style>
+    .cline{clear: both;overflow: auto;height: auto;min-height: 50px;margin-bottom: 30px;}
+    .cleft img{max-height: 60px;max-width: 60px;} .cleft{float: left;width: 10%; } .cleft>span{font-size: small;color: gray;}
+    .cright{float: left;width: 90%; }
+    .clinetitle{background-color: #e0ffff;width: 90%;} .clinetitle span{margin-right: 20px;color: #bbb;}
+    .comment{margin-top: 10px;padding-left: 10px;}
+    .icomment{}
+    .recomment{color: gray;padding: 5px;border-left: 1px solid gray}  .recomment span{margin-left: 30px;}
+    .commentbox{  }
+    .commentfoot{width: 90%;height: 20px;}
+    .commentfoot span{display: none;float: right;color: gray;font-size: xx-small;margin-right: 10px;cursor: pointer;}  .commentfoot span:hover{color: black}
+    .cline:hover .commentfoot>span{display: inline}
+    #addComment{width: 100%;}#Content{width:90%;height: 150px;font-size: small;}
+     #loading{display: none;}.errorinfo{display: none;color: #ff1493}
+    .com-reply{}.com-delete{}.report{}
+    .replyhold{background-color: #e0ffff;padding: 5px;width: 90%;display: none;height: auto;
+        color: gray;
+    }  .replyhold span{float: right;margin-right: 10px;cursor: pointer;
+       } .replyhold a{float: right;margin-right: 50px;} .replyhold span:hover{color: red;}
+</style>           
+    
+<script>
+    $(document).ready(function() {
+        /// 评论提交
+        var options = {
+            beforeSend: function() {
+                var str = $.trim($("#Content").val());
+                $("#addsub").val("正在提交...");
+                if (str == "") {
+                   updateTopic("亲,你还没有输入哦");
+                    return false;
+                }
+                if (str.length <2) {
+                    updateTopic("再多说几个字嘛");
+                    return false;
+                }
+                $("#Content").val("");
+                $("#addsub").attr("disabled", "disabled");
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data == 1) {
+                    $("#addsub").removeAttr("disabled");
+                    var id = $("#tpid").val();
+                    $.post("/Interactive/Coments", { topicId: id }, function (data1) {
+                        $("#commnetupdate").html(data1);
+                    });
+                } else {
+                    updateTopic("评论提交失败,请重试");
+                }
+            }, complete: function (xhr) {
+                updateTopic("评论提交失败,请重试");
+                $("#addsub").val("加上去");
+            }
+        };
+        $('#CommentForm').submit(function() {
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+      
+        /// 提示
+        function updateTopic(data) {
+            $(".errorinfo").show().html(data);
+            var stt = setTimeout(function () {
+                $(".errorinfo").fadeOut();
+                clearTimeout(stt);
+            }, 2000);
+        }
+        // 删除预处理  TopicUserid
+        function predelete() {
+            var selfid = $("#sefeid").val();
+            var topuserId = $("#TopicUserid").val();
+            if (selfid != topuserId) {//当前人不是这个话题的发起人
+                //只能删除自己的
+                $(".com-delete").each(function() {
+                    var dd = $(this).attr("data-userid");
+                    if (dd !== selfid) {//不是自己的 就不能删除
+                        $(this).remove();
+                    }
+                });
+            }
+            //是自己的话就不能点回复
+            $(".com-reply").each(function () {
+                var dd = $(this).attr("data-userid");
+                if (dd == selfid) {//是自己的 就不能回复
+                    $(this).siblings(".report").remove();//自己也不能举报自己 不要这么无聊了
+                    $(this).remove();
+                }
+            });
+            
+        }
+
+        predelete();
+
+
+        // 删除回复
+        $(".com-delete").click(function() {
+            var issuer = confirm("真的要删除这条评论么?");
+            if (issuer) {
+                var id = $(this).parent().attr("data-commentId");
+                var parent = $(this).parent().parent().parent().parent();
+                //传递数据
+                $.post("/Interactive/DeleteComment", { id: id }, function() {
+                    //隐藏这一栏
+                    parent.slideUp();
+                });
+            }
+        });
+
+        ///------ 回复：
+        $(".com-reply").click(function() {
+            var name = $(this).parent().attr("data-username");
+            var repid = $(this).parent().attr("data-commentId");
+            var userid = $(this).parent().attr("data-UserId");
+            var content = $(this).parent().siblings(".icomment").html();
+            var selfid = $("#sefeid").val();
+            if (selfid == userid) {
+                return;
+            }
+            $(".replyhold").html("").show();
+            var div = content + "<span title='撤销'>&times;</span><a href='/User/Index?id='" + userid + ">" + name + "</a>";
+            $("#replyid").val(repid);
+            $(".replyhold").html(div);
+            var hi = $("body").height();
+            $('html, body').animate({ scrollTop: hi }, 500);
+        });
+        /// 取消回复
+        $(".replyhold span").live("click", function() {
+            $(".replyhold").hide();
+            $("#replyid").val(0);
+        });
+    });
+
+</script>
+<div class="commentbox" id="commnetupdate">
+    <div id="loading">正在加载评论....</div> 
+    @if (Model.Count() != 0)
+    {
+        foreach (var uc in Model)
+        {
+            <div class="cline">
+                <div class="cleft">
+                    <a href="/User/Index?id=@uc.User.User.UserId"><img src="@uc.User.User.ImgUrl"/></a><br/>
+                    <span>@Html.Raw(uc.User.User.Age+"岁")</span><br/>
+                    <span>@Html.Raw(uc.User.BaseInfo.ResidenceProvince+uc.User.BaseInfo.ResidenceCity)</span>
+                </div>
+                <div class="cright">
+                    <div class="clinetitle" data-userid="@uc.Comment.UserId"><span><a href="/User/Index?id=@uc.User.User.UserId">@uc.User.User.UserName</a></span> <span>@uc.Comment.ActionTime</span></div>
+                    <div class="comment">
+                        @if (uc.ReComment != null)
+                        {
+                            <div class="recomment">@uc.ReComment.Content <span><a href="/User/Index?id=@uc.ReComment.UserId">@uc.ReComment.UserName</a></span></div>
+                        }
+
+                        <div class="icomment"> @uc.Comment.Content </div>
+                        <div class="commentfoot" data-commentId="@uc.Comment.Id" data-username="@uc.Comment.UserName" data-userid="@uc.Comment.UserId" >
+                            <span class="report"  style="padding: 0;"data-reportType="comment" data-content="@uc.Comment.Content"
+                   data-relateId="@uc.Comment.Id" data-userId="@uc.Comment.UserId" data-userName="@uc.Comment.UserName" data-sextag="@uc.Sex">举报</span>
+                            <span class="com-delete" data-userid="@uc.Comment.UserId">删除</span>
+                            <span  data-userid="@uc.Comment.UserId" class="com-reply">回应</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+     
+    }
+    <div id="reply">你的回应</div>
+    <div class="replyhold"></div>
+    <form action="/Interactive/CreateComment" method="POST" id="CommentForm">
+        <div id="addComment" >
+            <textarea  id="Content" name="content"></textarea>
+            <input type="submit" id="addsub" value="加上去" class="btn btn-primary" />
+            <span class="errorinfo"></span>
+            <input type="hidden" id="tpid" name="TopicId" value="@ViewBag.TopicId"/>
+            <input type="hidden" id="replyid" name="ReplyId" value="0"/>
+        </div>
+    </form>
+       <input type="hidden" id="sefeid"  value="@ViewBag.SefeId"/>
+       <input type="hidden" id="TopicUserid"  value="@ViewBag.TopicUserId"/>
+</div>

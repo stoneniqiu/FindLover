@@ -1,0 +1,9 @@
+﻿<style>
+     .req{background-color: white;opacity: 1; padding: 10px 20px;  box-shadow: 0 0  8px gainsboro;min-height: 28px;}
+     .req a{float: right;color: red;font-size: small;} .req span{font-weight: bold;}
+     .red a:hover{text-decoration: none;}
+       .heart{ color: red;margin-right:5px;font-size: 2.2em;position: relative;-webkit-transition: all 1s linear;font-weight: normal;
+       }
+        .req:hover>.heart{ color: #ff00ff; font-size: 2.5em;}
+ </style>
+<div class="req"><span class="heart">&hearts;</span> @Html.Raw(ViewBag.Requir) <a  href="/User/EditIndex?index=3">修改择偶要求</a></div>

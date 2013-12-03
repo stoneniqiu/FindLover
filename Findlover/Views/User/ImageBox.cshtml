@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Findlover.Models.Iamgbox>
+<style>
+    .imgtigger{float: left;padding: 5px;width: 100px;height: 100px;height: auto; border: 1px dashed white;cursor: pointer}.imgblock img{ max-height: 100px;max-width: 100px; }
+    .imgtigger:hover{border: 1px dashed gainsboro;}.imgdelete span {
+                                                       float: right;padding:0 5px;background-color: gainsboro;
+                                                       -ms-border-radius: 3px;
+                                                       border-radius: 3px;display: none;
+                                                   }.imgtigger:hover>.imgdelete span{display: inline}
+    .imgtigger span{font-size: small;color: gray;}
+    .imgdelete span:hover{color: red;}
+</style>
+<script>
+    $(function() {
+        $(".imgdelete span").live("click",function() {
+            var iss = confirm("删除之后不可恢复,确定要删除吗？");
+            var img = $(this).parent().parent();
+            if (iss) {
+                var id = $(this).attr("data-id");
+                $.post("/User/DeletImg", { id: id }, function() {
+                    img.fadeOut();
+                });
+            }
+        });
+    })
+</script>
+    @foreach (var iamgbox in Model)
+    {
+        <div class="imgtigger" title="@iamgbox.ActionTime">
+            <img alt="" src="@iamgbox.ImgUrl"/>
+            <span>@iamgbox.Remark</span>
+            @if (ViewBag.IsSelf == "Self")
+            {
+          <div class="imgdelete"><span title="删除" data-id="@iamgbox.Id">&times;</span></div>
+            }
+        </div>
+    }
+
+
+ 

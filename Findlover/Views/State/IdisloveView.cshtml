@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Findlover.ViewModel.LoverState>
+
+@{
+    Layout = null;
+}
+<style>
+    .totoal span{color: #00bfff;font-size: 2em;font-family: 楷体}
+    .totoal{margin: 10px 0 10px 0; font-size: medium;text-indent: 10px;}
+    .hold{background-color: white;padding: 25px;margin-top: 20px;box-shadow: 0 0 10px gray;height: auto;}
+    .vline{clear: both;min-height: 100px; overflow: auto;height: auto ;padding: 20px 10px; border-bottom: 1px gainsboro solid;}
+    .vline:hover{background-color: #f0ffff;}
+    .imgleft{width: 100px;height: 100px;float: left}
+    .imgleft img{width: 90px;height: 90px;}
+    .message{float: left;padding: 10px;width: 80%} .message span{color: gray}
+    .message div{color: gray;font-size: small}
+    .message:hover .dislike {color: #00bfff}
+    .messagefoot .dislike{ float: right; cursor: pointer;}
+</style>
+<div class="hold">
+  
+    <div class="totoal">@Html.Raw("共有"+Model.Count()+"个<span>"+ViewBag.Sex+"</span>被你屏蔽了,不要太挑剔哦")</div>
+    @{
+        foreach (var visitUser in Model)
+        {
+            <div class="vline">
+                <div class="imgleft">
+                    <a href="/User/Index?id=@visitUser.Lover.User.UserId"><img  src="@visitUser.Lover.User.ImgUrl"/></a> 
+                </div>
+                <div class="message">
+                    <a href="/User/Index?id=@visitUser.Lover.User.UserId">@visitUser.Lover.User.UserName</a> <br/>
+                    <div>@Html.Raw(visitUser.LastState.Content)</div>
+                    <div class="messagefoot"><span><i class="icon-time"></i> @visitUser.ActionTime</span>
+                        <span class="dislike" data-userid="@visitUser.Lover.User.UserId"> 解除屏蔽 </span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

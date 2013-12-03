@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Findlover.Models.Message>
+
+@{
+    ViewBag.Title = "CheckMessageRecords";
+}
+<link href="../../Content/CSS/Message.css" rel="stylesheet" />
+
+<div class ="warp">
+    <div class="msg_center" >
+        <div class="msg_titleBar" >
+            <div class ="titleBar-title"><h3 >我和<span class="text-lightBlue">@ViewBag.name</span>的私信对话</h3></div>
+            <div class="titleBar-info"><a  href="/Message/CheckPrivateMessage">消息中心</a><span >&gt;@ViewBag.name</span></div>
+         </div>        <div class="pmsg_row"> 
+            <div class="pmsg_Img_blank"></div> 
+            <textarea class="message-send-textarea"> </textarea>
+            <div class="pmsg_Img_left"><img src="@ViewBag.ImgUrl"/></div> 
+            <div class="msg_sendsuccess" >发送成功！</div>
+            <div class="msg_send">发送</div>
+            
+        </div>
+        
+        <div class ="message_box" data-myimg="@ViewBag.ImgUrl" data-otherimg="@ViewBag.OtherImgUrl" data-otherid="@ViewBag.OtherId">
+        @{
+            foreach (var item in Model)
+            {
+                if (item.FromUserId == ViewBag.myid)
+                {
+                    <div class="pmsg_row"> 
+                        <div class="pmsg_Img_blank"></div> 
+                        <div class="textarea-arrow" style="border-color: #faf0e6 transparent transparent transparent; right: 95px;"></div>
+                        <div class="pmsg_right" data-id="@item.FromUserId" style="background-color: #faf0e6">
+                            <div class="prow_close">&times;</div>    
+                            <div class="prow_content" data-userid="@item.FromUserId" data-id="@item.Id">@Html.Raw(item.Content) </div>
+                            <div class="prow_time">  发布于: @item.ActionTime </div>
+                        </div>
+                        <div class="pmsg_Img_left"><img src="@ViewBag.ImgUrl"/></div> 
+                        <div style="display: block;height: 1px;"></div>
+                    </div>
+                }
+                else
+                {
+                    <div class="pmsg_row"> 
+                        <div class="pmsg_Img_left"><img src="@ViewBag.OtherImgUrl"/></div> 
+                        <div class="textarea-arrow" style="border-color: aliceblue transparent transparent transparent; left: 95px;"></div>
+                        <div class="pmsg_right" data-id="@item.FromUserId" style="background-color: aliceblue">
+                            <div class="prow_close">&times;</div>    
+                            <div class="prow_content" data-userid="@item.FromUserId" data-id="@item.Id">@Html.Raw(item.Content) </div>
+                            <div class="prow_time">  发布于: @item.ActionTime </div>
+                            <div class="prow_inform">  <span class="report" data-reportType="message" data-content="@Html.Raw(item.Content)" data-relateId="@item.Id" data-userId="@item.FromUserId" data-userName="@item.FromUserName" data-sextag="@ViewBag.Sex"><a >拉黑/举报</a></span></div>
+                        </div>
+                        <div class="pmsg_Img_blank"></div> 
+                    </div>
+                }
+            }
+            <script>
+                $(function () {
+                    if ($(".text-lightBlue").html() == "意中人管理员") {
+                        $(".report").remove();
+                        $(".pmsg_row:eq(0)").hide();
+                    }
+
+                    $(".msg_send").click(function() {
+                        var text = $.trim($(".message-send-textarea").val());
+                        var toid = $(".message_box").attr("data-otherid");
+                         
+                        if (text =="") {
+                            alertfun("msg_sendsuccess", 2000, "内容不能为空!");
+                            return;
+                        } else {
+                            $.post("/Message/SendMessage", { toid: toid, content: text, type: 0, statetype: 0, stateid: 0 }, function (data) {
+                                var datetime = changeDateFormat(data.ActionTime);
+                                var myimgurl = $(".message_box").attr("data-myimg");
+                                var otherimg = $(".message_box").attr("data-otherimg");
+                                
+                                if (data.FromUserId == toid) {
+                                        $(".message_box").prepend("<div class='pmsg_row'> " +
+                                            "<div class='pmsg_Img_left'><img src='" + otherimg + "'/></div>" +
+                                            "<div class='textarea-arrow' style='border-color: aliceblue transparent transparent transparent; left: 95px;'></div>" +
+                                            "<div class='pmsg_right'data-id='" + data.FromUserId + "' style='background-color: aliceblue'>" +
+                                            "<div class='prow_close'>&times;</div>" +
+                                            "<div class='prow_content'data-id='"+data.Id+"'>" + data.Content + " </div>" +
+                                            "<div class='prow_time'>  发布于:" + datetime + "</div>" +
+                                            "<div class='prow_inform'><a >拉黑/举报</a></div>" +
+                                            "</div>" +
+                                            "<div class='pmsg_Img_blank'></div></div>");
+                                    } else {
+                                        $(".message_box").prepend("<div class='pmsg_row'> " +
+                                            "<div class='pmsg_Img_blank'></div>" +
+                                            "<div class='textarea-arrow' style='border-color: border-color: #faf0e6 transparent transparent transparent; right: 95px;'></div>" +
+                                            "<div class='pmsg_right' data-id='" + data .FromUserId + "' style='background-color: #faf0e6'>" +
+                                            "<div class='prow_close'>&times;</div>" +
+                                            "<div class='prow_content'data-id='" + data.Id + "'>" + data.Content + " </div>" +
+                                            "<div class='prow_time'>  发布于:" + datetime + "</div>" +
+                                            "</div>" +
+                                            "<div class='pmsg_Img_left'><img src='" + myimgurl + "'/></div></div>");
+                                    }
+
+                                $(".message-send-textarea").val("");
+                                alertfun("msg_sendsuccess", 2000, "发送成功!");
+                                
+                            });
+                        }
+                    });
+                    $(".message_box .prow_close").live("click", function() {
+                        var id = $(this).next().attr("data-id");
+                        var part = $(this).parent().parent();
+                        $.post("/Message/RemoveMessage", { id: id }, function (data) {
+                            if (data > 0) {
+                                part.remove();
+                            }
+                        });
+                    });
+
+                    //$(".message_box .prow_close").each(function(n) {
+                    //    $(this).live("click", function () {
+                    //        alert(1);
+                    //        var id = $(".message_box .prow_content").eq(n).attr("data-id");
+                    //        $.post("/Message/RemoveMessage", {id:id}, function(data) {
+                    //            if (data > 0) {
+                    //                $(".message_box .pmsg_row").eq(n).remove();
+                    //            }
+                    //        });
+                    //    });
+                    //});
+                });
+
+                function alertfun(cls, time, text) {
+                    $("." + cls).html(text).show();
+                    setTimeout(function () {
+                        $("." + cls).fadeOut();
+                    }, time);
+                }
+                function changeDateFormat(cellval) {
+                    var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+                    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                    return date.getFullYear() + "/" + month + "/" + currentDate;
+                }
+            </script>
+        }
+           </div>
+    </div>
+   
+</div>
+
+
+
+

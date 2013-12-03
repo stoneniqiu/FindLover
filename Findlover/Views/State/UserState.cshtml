@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Findlover.ViewModel.UserStateView>
+<style>
+    .state_foot a {
+        text-decoration: none;
+        color: #666;
+    }
+    .state_foot{ overflow: hidden;height: 30px;}
+    .state_foot a:hover {
+        color: black;
+    }
+     .likeinfo{color: #008000;position: absolute;border: 1px solid gainsboro;left: 0;top: 0;z-index: 1;padding: 5px;background-color: white;opacity: 1;
+      display: none;
+    }
+     .leftfoot{position: relative;overflow: visible;display: block;}  .leftfoot span{background-color: white;}
+</style>
+<script>
+    $(function () {
+        //$(this).find("i").eq(n).css("background-color", "#ff00ff");
+        //$(this).attr("title", "你已经赞过了");
+        
+        $.post("/Base/GetPraiseOrHelloList", { type: 1 }, function (data) {
+            $(".parise").each(function (n) {
+                var id = $(this).attr("data-stateid");
+                for (var i = 0; i < data.length; i++) {
+                    if (parseInt(id) == data[i]) {
+                        $(".parise i").eq(n).css("background-color", "#ff00ff");
+                        $(".parise ").eq(n).attr("title", "你已经赞过了");
+                    }
+                }
+            });
+        });
+        $.post("/Base/GetLikeList", {}, function (data) {
+            $(".like").each(function () {
+                var id = $(this).attr("data-userid");
+                for (var i = 0; i < data.length; i++) {
+                    if (parseInt(id) == data[i]) {
+                        $(this).html("已喜欢").css("background-color", "white").css("color", "#00ff7f").css("border", "1px gainsboro solid");
+                        $(this).attr("title", "取消喜欢");
+                    }
+                }
+            });
+        });
+    })
+
+</script>
+@if (!Model.Any())
+{
+    <div style="background-color: white; -ms-opacity: 1; opacity: 1;padding: 10px;"> <img src="../../Content/Photos/weiqu.jpg" /><br/>
+         还没有人，是不是要求太高了或者把谁屏蔽了。
+    </div>
+}
+ 
+@foreach (var view in Model)
+    {
+    <div class="stateline"  >
+        @* 左边的照片*@
+        <div class="leftimg">
+            <a href="/User/Index?id=@view.SatateUser.UserId">
+                <img src="@view.SatateUser.ImgUrl"/>
+            </a>
+            <div class="leftfoot"> 
+            <span class="like" data-userid="@view.SatateUser.UserId"><i class="icon-heart icon-white"></i>喜欢</span>
+            <span class="dislike" data-userid="@view.SatateUser.UserId">不感兴趣</span>
+           <span class="likeinfo"></span>
+            </div>
+        </div>
+        <div class="stateright">
+            <div class="statetitle">
+                <span class="uname">@view.SatateUser.UserName</span>  @view.SatateUser.Age 岁 @view.Education @view.Hight @view.ImgCount 张照片<span class="rate">推荐度:<span>@Math.Round(view.RecommentRate * 100, 0)%</span> </span>
+            </div>
+            <div class="state_content" data-userid="@view.State.UserId" >@Html.Raw(view.State.Content)</div>
+            <div class="state_foot">
+                <span class="time">@view.State.ActionTime</span>
+                <span class="parise" data-userid="@view.SatateUser.UserId" data-type="1" data-stateid="@view.State.Id" title="赞一下">
+                    <i class="icon-heart icon-white"></i>+<samp>@view.State.PraiseCount</samp>
+                </span>
+                <span class="chat" title="说两句"><a data-name="@view.SatateUser.UserName" data-msgType="0" data-stateType="1" data-relateId="@view.State.Id"   data-content="@view.SatateUser.UserName" data-id="@view.SatateUser.UserId" href="#msg_box" data-toggle="modal"><i class="icon-envelope"></i>私信</a></span>
+            </div>
+        </div>
+    </div>   
+}

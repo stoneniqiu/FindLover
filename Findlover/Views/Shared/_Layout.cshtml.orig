@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+   @* <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>*@
+    <script src="../../Scripts/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="../../Scripts/jquery-1.8.3.js"></script>
+    <link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+    <link href="../../Content/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+     <style>
+        .navbarmodify{ opacity: 0.8;-moz-opacity: 0.8;fill-opacity: 0.8;line-height: 25px;/*box-shadow: 0 1px 10px gray;*/}
+        .navbar-inner ul{ font-size: large}
+        ul li a span{display: block; padding: 6px 0;}
+        li ul{ display: none;position: absolute;top: 35px; left: 0;}
+        li {position: relative;list-style-type: none} 
+         .nav ul {
+                 display: none;
+                 margin: 0;
+                 padding: 0;
+                 width: 185px;
+                 position: absolute;
+                 top: 45px;
+                 left: 10px;
+             padding: 10px;
+                 background: white ;
+                 border: solid 1px #b4b4b4;
+                 -webkit-border-radius: 10px;
+                 -moz-border-radius: 10px;
+                 border-radius: 10px;
+                 -webkit-box-shadow: 0 1px 8px rgba(0,0,0, .3);
+                 -moz-box-shadow: 0 1px 8px rgba(0,0,0, .3);
+                 box-shadow: 0 1px 8px rgba(0,0,0, .3);
+             cursor: pointer;
+             }
+          .nav ul li{ padding: 5px 0;font-size: small}
+          .nav ul li:hover{text-decoration: underline}
+        .nav li:hover>ul{ display: block; }
+    </style>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+	<link href="@Url.Content("~/Content/kendo/2012.2.710/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2012.2.710/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2012.2.710/kendo.silver.min.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2012.2.710/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2012.2.710/kendo.aspnetmvc.min.js")"></script>
+</head>
+   
+    <body>
+              
+        <div class="navbar navbar-fixed-top  navbar-inverse navbarmodify" >
+            <div class="navbar-inner ">
+                <div style="margin-left: 15%">
+                    <ul id="mianNav" class="nav">
+                        <li class="active"><a href="#"><span style="font-family:楷体;font-size: 1.5em;text-shadow: 0 0 2px #f08080">意中人</span></a></li>
+                        <li class=""><a href="/Home/Index"><span>推荐</span></a></li>
+                        <li class=""><a href="/User/Search"><span>搜索</span></a></li>
+                        <li class=""><a href="/State/Index"><span>动态</span></a></li>
+                        <li class=""><a href="/User/Index"><span>个人主页</span></a></li>
+                        <li class="divider-vertical"></li>
+                        <li  class="span1 "></li>
+                        <li class=""><a href="#"><span>上传照片<i class="icon-camera icon-white"  ></i></span></a></li>
+                        <li class=""><a href="/Admin/Index"><span>后台管理<i class="icon-edit icon-white"  ></i></span></a></li>
+                        <li class="divider-vertical"></li>
+                        <li class="span1"></li>
+                        <li class="imore"><a href="#"><span>私信
+                                                          <i class=" icon-chevron-down icon-white" style="vertical-align: bottom;opacity: 0.7"></i>
+                                                      </span></a>
+                            <ul>
+                                <li><a href="/Message/CheckPrivateMessage">查看私信</a></li>
+                                <li>新增"赞"</li>
+                                <li>新增收藏</li>
+                                <li>系统通知</li>
+                                <li style="border-top: 1px solid #a9a9a9;">查看全部消息</li>
+                            </ul>
+                        </li>
+                        <li class=" ">
+                            <a href="#"><span>用户 
+                                            <i class=" icon-chevron-down icon-white" style="vertical-align: bottom;opacity: 0.7 "></i></span></a>
+                            <ul>
+                                <li>修改密码</li>
+                                <li>关闭资料</li>
+                                <li style="border-top: 1px solid #a9a9a9;"><a href="/User/LogOff">退出</a></li>
+                            </ul>
+                      
+                        </li>
+                    </ul>
+               
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function() {
+                $("#mianNav>li").each(function(n) {
+                    $(this).click(function() {
+                        // alert(n);
+                    });
+                });
+            });
+            
+
+        </script>
+<<<<<<< HEAD
+       
+=======
+        
+        <script>
+            $(function () {
+                $(".chat").each(function (n) {
+                    $(this).click(function () {
+                        var id = $(".chat a").eq(n).attr("data-id");
+                        var name = $(".chat a").eq(n).attr("data-name");
+                        $(".toname").html(name);
+                        $(".toid").html(id);
+                    });
+
+                });
+
+                $(".btn,.btn-primary").click(function () {
+                    var toid = $(".toid").html();
+                    var content = $(".msg_content").val();
+                    if (content == null) {
+                        return;
+                    }
+                    $.post("/Message/SendMessage", { toid: toid, content: content }, function (data) {
+                        //$("#msg_box").hide();
+                    });
+                });
+            })
+
+        </script>
+
+>>>>>>> 000fda1f9d544a62f17670bb5260ad72f8c9aa93
+        <div  id="msg_box" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>发送私信</h4>
+            </div>
+            <div class="modal-body">
+                <div class="receiver">收件人：<span class="toname" style="color: blue"></span><span class="toid" style="display: none"></span></div>
+                <textarea class="msg_content" style="width: 500px;height: 100px ;margin-top: 5px;"></textarea> 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary"  data-dismiss="modal" aria-hidden="true">发送</button>
+            </div>
+        </div>
+        @RenderBody()
+    </body>
+</html>

@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "意中人";
+} 
+ 
+<style>
+    .items{}
+     div.loader {
+            font-style: italic;
+            text-align: center;
+            margin: 20px;
+            height: 24px;
+            background: url(../../Content/Photos/loading.gif) no-repeat center center;
+           
+        }
+     div ins{background-color: gainsboro;margin-top: 5px;text-align:center}
+</style>
+<script>
+    $(function () {
+        $("#myCarousel").carousel();
+    })
+</script>
+<style>
+    #myCarousel{width: 100%; } #myCarousel img{width: 100%;}
+</style>
+<div id="myCarousel" class="carousel slide">
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                      <img src="../../Content/backgroundimg/b1.jpg" />
+                    <div class="carousel-caption">
+                      <h4>你的内心,是否一直隐藏着一个缤纷的世界</h4>
+                      <p>关于爱,关于生命,关于微笑,关于从某一天起,你发现所有美的一切。</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                       <img src="../../Content/Photos/leaft.jpg" />
+                    <div class="carousel-caption">
+                      <h4>哪怕时光淘尽繁华,你还是如此确信</h4>
+                      <p>爱,还是依旧芬芳，熟稔，质朴的让人沉醉</p>
+                    </div>
+                  </div>
+                  <div class="item">
+                      <img src="../../Content/Photos/cop.jpg" />
+                    <div class="carousel-caption">
+                      <h4>如果渴望,就请相信爱,学会爱,勇敢爱</h4>
+                      <p>找到你的意中人,向那个缤纷的世界出发吧</p>
+                    </div>
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+              </div>
+ 
+ 

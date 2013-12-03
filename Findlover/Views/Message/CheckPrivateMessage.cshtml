@@ -1,0 +1,75 @@
+﻿
+@model IEnumerable<Findlover.ViewModel.MessageInfo>
+
+@{
+    ViewBag.Title = "CheckPrivateMessage";
+}
+
+ <link href="../../Content/CSS/Message.css" rel="stylesheet" />
+
+
+<div class ="warp">
+    <div class="msg_center">
+         <div class="msg_titleBar" >
+            <div class ="titleBar-title"><h3 >消息中心</h3></div>     
+         </div>
+   @*     <div id="filterBox" class="notify-filterBox">
+            <ul class="sub-tabBar">
+                <li class="allmsg"><a >全部</a></li>
+                <li class="line">|</li>
+                <li class ="unreadmsg"><a>未读</a></li>
+            </ul>
+            <a class="link-blue" >全部标记为已读</a>
+            <span class="fR">
+                <label class="label-tag "><input class=""  type="checkbox" />符合择偶条件的用户</label>
+            </span>
+        </div>*@
+
+    @*    <div class="msg_row">
+            <div class="row_left">
+                <div class="msg_Img"><img src="../../Content/Photos/digg.jpg" /></div>
+            </div>
+            <div class="row_right">    
+                <div class="row_title"><a  href="#">最近赞过我的</a></div>
+            </div>
+        </div>
+        <div class="msg_row">
+            <div class="row_left">
+                <div class="msg_Img"><img src="../../Content/Photos/visitor.png" /></div>
+            </div>
+            <div class="row_right">    
+                <div class="row_title"><a  href="#" >最近访客</a></div>
+            </div>
+        </div>
+        <div class="msg_row">
+            <div class="row_left">
+                <div class="msg_Img"><img src="../../Content/Photos/heed.jpg" /></div>
+            </div>
+            <div class="row_right">    
+                <div class="row_title"><a href="#">最近收藏我的</a></div>
+            </div>
+        </div>*@
+     
+       <div class="message_box">
+         @{
+            foreach (var item in Model)
+            {
+                <div class="msg_row"  >
+                    <div class="row_left">
+                        <div class="msg_Img"><a href="/User/Index?id=@item.UserId"><img src="@item.ImgUrl"/></a></div> 
+                        <div class="msg_personalinfo"><span>@Html.Raw(item.Age+"岁")</span><span>@item.City</span></div>
+                    </div>
+                    <div class="row_right" >    
+                        <div class="row_name"><span style="color: gray;font-size: small">@item.Tag</span><a href="/User/Index?id=@item.UserId">@item.UserName</a></div>
+                        <div class="row_content" data-userid="@item.UserId">@Html.Raw(item.Message) </div>
+                        <div class="row_time">  发布于: @item.LastMessageTime </div>
+                        <div class="row_reply"><a href="/Message/CheckMessageRecords?fid=@item.UserId">共 @item.MsgCount 条记录</a>
+                            <span class="chat" title=""><a data-id="@item.UserId" data-name="@item.UserName"  data-msgType="0" data-stateType="0" data-relateId="0"  href="#msg_box" data-toggle="modal">回复</a></span></div>
+                    </div>
+                </div>
+            } 
+         } 
+           </div>
+       </div>
+</div>
+

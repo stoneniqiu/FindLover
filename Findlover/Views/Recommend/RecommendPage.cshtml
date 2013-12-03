@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Findlover.ViewModel.RecommendUser>
+@* ReSharper disable once InvalidValue *@
+ 
+<link href="../../Content/CSS/recomentpage.css" rel="stylesheet" />
+<script>
+
+    $.post("/Base/GetPraiseOrHelloList", { type: 0 }, function (data) {
+        $(".hi").each(function (n) {
+            var id = $(this).attr("data-userid");
+            for (var i = 0; i < data.length; i++) {
+                if (parseInt(id) == data[i]) {
+                    $(".hi").eq(n).css("color", "#4169e1").css("background-color", "#fff0f5").attr("disabled", "disabled").attr("title", "已打招呼");
+                }
+            }
+        });
+    });
+    
+</script>
+@if (!Model.Any())
+{
+    <div style="background-color: white; -ms-opacity: 1; opacity: 1;padding: 10px;"> <img src="../../Content/Photos/weiqu.jpg" /><br/>
+         还没有人，是不是要求太高了或者把谁屏蔽了。
+    </div>
+}
+@{
+    foreach (var reUser in Model)
+    {
+        var user = reUser.User.User;
+    <div class="userrow">
+        <div class="upline">
+            <div class="leftimg"><a href="/User/Index?id=@user.UserId">
+                <img src="@user.ImgUrl" alt="@user.UserName"/></a></div>
+            <div class="rightbox">
+                <div class="nameline"><span><a href="/User/Index?id=@user.UserId">@user.UserName</a></span> 
+                    
+                    <div class="rrate">
+                        <a href="/User/Index?id=@user.UserId">
+                        推荐度:<samp>@Math.Round(reUser.Rate.TotalRate * 100, 0)</samp><span>%<i class="icon-play"></i></span>
+                        <div class="rediv">
+                            <ul>
+                                <li>用户热度:@Math.Round(reUser.Rate.UserHotRate*100,0)%</li>
+                                <li>符合我的要求:@Math.Round(reUser.Rate.ForMeRate*100,0)%</li>
+                                <li>@Html.Raw("符合"+ViewBag.Sex)的要求:@Math.Round(reUser.Rate.ForOtherRate*100,0)%</li>
+                                <li>生活婚恋观契合度:@Math.Round(reUser.Rate.LoveViwRate*100,0)%</li>
+                            
+                            </ul>
+                        </div> </a>
+                   </div>   
+                </div>
+                <div class="infostr" >@Html.Raw(reUser.InfoStr) </div>
+                <div class="bottomline" data-userid="@user.UserId">@Html.Raw(reUser.LastSate)</div>
+                <div class="state_foot">
+                    <span class="hi" data-userid="@user.UserId" title="打招呼"><i class="icon-comment"></i>Hi </span> 
+                    <span class="chat" title="说两句">
+                        <a data-name="@user.UserName" data-id="@user.UserId" data-msgType="0" data-stateType="0" data-relateId="0"  href="#msg_box" data-toggle="modal"> <i class="icon-envelope"></i>私信</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    }
+}
