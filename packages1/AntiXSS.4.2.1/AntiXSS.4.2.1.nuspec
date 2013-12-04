@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>AntiXSS</id>
+    <version>4.2.1</version>
+    <title>AntiXSS</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://wpl.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wpl.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>AntiXSS is an encoding library which uses a safe list approach to encoding. It provides Html, XML, Url, Form, LDAP, CSS, JScript and VBScript encoding methods to allow you to avoid Cross Site Scripting attacks. This library is part of the Microsoft SDL tools.</description>
+    <summary>AntiXSS is an encoding library for .NET.</summary>
+    <releaseNotes />
+    <copyright>(c) 2009, 2010, 2011 Microsoft Corporation</copyright>
+    <language />
+    <tags>AntiXSS ASP.NET</tags>
+  </metadata>
+</package>

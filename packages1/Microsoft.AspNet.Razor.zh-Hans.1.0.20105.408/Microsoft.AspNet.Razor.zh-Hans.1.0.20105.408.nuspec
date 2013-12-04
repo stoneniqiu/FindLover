@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.Razor.zh-Hans</id>
+    <version>1.0.20105.408</version>
+    <title>Microsoft ASP.NET Razor Chinese (Simplified) Resources</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetwebpages_eula.rtf</licenseUrl>
+    <projectUrl>http://www.asp.net/web-pages</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This package contains the Chinese (Simplified) satellite assemblies for ASP.NET Razor.</description>
+    <language>zh-Hans</language>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Razor" version="1.0.20105.408" />
+    </dependencies>
+    <references />
+  </metadata>
+</package>

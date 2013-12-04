@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.Mvc.zh-Hans</id>
+    <version>3.0.20105.1</version>
+    <title>Microsoft ASP.NET MVC 3 Chinese (Simplified) Resources</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetmvc3update-eula.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/mvc</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This package contains the Chinese (Simplified) satellite assemblies for ASP.NET MVC 3.</description>
+    <language>zh-Hans</language>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
+    </dependencies>
+    <references />
+  </metadata>
+</package>

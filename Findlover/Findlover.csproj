@@ -40,9 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlSanitizationLibrary">
-      <HintPath>..\packages\AntiXSS.4.2.1\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>..\..\..\..\Program Files (x86)\Telerik\Kendo UI for ASP.NET MVC Q2 2012\wrappers\aspnetmvc\Binaries\Mvc3\Kendo.Mvc.dll</HintPath>
     </Reference>
